@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Latent Arch">
+  <defs>
+    <linearGradient id="la-stroke" x1="14" y1="46" x2="50" y2="18" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2dd4bf"/>
+      <stop offset="1" stop-color="#6366f1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- скруглённая плитка-фон (читается во вкладке и в светлой, и в тёмной теме) -->
+  <rect x="0" y="0" width="64" height="64" rx="14" fill="#0d1117"/>
+
+  <!-- Монограмма LA: L = левая вертикаль + общее основание; A = арка с перекладиной -->
+  <g fill="none" stroke="url(#la-stroke)" stroke-width="5"
+     stroke-linecap="round" stroke-linejoin="round">
+    <!-- L: вертикаль -->
+    <path d="M18 16 L18 46"/>
+    <!-- общее основание (нижняя черта L и опоры A) -->
+    <path d="M18 46 L46 46"/>
+    <!-- A: арка/двускатные ноги, вырастающие из основания -->
+    <path d="M28 46 L37 20 L46 46"/>
+    <!-- перекладина A -->
+    <path d="M31.5 38 L42.5 38"/>
+  </g>
+</svg>
