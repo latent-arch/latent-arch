@@ -11,7 +11,8 @@
 </header>
 
 {{- range .RegularPages }}
-<article class="post-entry">
+<article class="post-entry" data-link="{{ .Params.link }}">
+  <span class="ai-news-badge" aria-hidden="true">new</span>
   <header class="entry-header">
     <h2 class="entry-hint-parent">{{ .Title }}</h2>
   </header>
@@ -24,5 +25,72 @@
   <a class="entry-link" aria-label="Read the original post: {{ .Title | plainify }}" href="{{ .Params.link }}" target="_blank" rel="noopener"></a>
 </article>
 {{- end }}
+
+<style>
+  .ai-news-badge {
+    display: none;
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--primary);
+    color: var(--theme);
+  }
+  .ai-news-unseen .ai-news-badge {
+    display: inline-block;
+  }
+</style>
+
+{{/* Пометка непросмотренных карточек. Состояние — только в localStorage этого браузера
+     (переносимость между устройствами сознательно не нужна). Карточка считается просмотренной,
+     когда попала во вьюпорт; бейдж при этом живёт до следующей загрузки страницы. */}}
+<script>
+  (() => {
+    const KEY = "ai-news-seen";
+    const cards = Array.from(document.querySelectorAll(".post-entry[data-link]"));
+    if (!cards.length || !("localStorage" in window)) return;
+
+    const pageLinks = cards.map((c) => c.dataset.link);
+    // Храним только ссылки, всё ещё присутствующие на странице, — retention чистит хранилище сам
+    const persist = (set) => {
+      try {
+        localStorage.setItem(KEY, JSON.stringify(pageLinks.filter((l) => set.has(l))));
+      } catch {}
+    };
+
+    let stored = null;
+    try {
+      stored = JSON.parse(localStorage.getItem(KEY));
+    } catch {}
+    if (!Array.isArray(stored)) {
+      // Первый визит (или битые данные): baseline без бейджей, иначе «новым» было бы всё
+      persist(new Set(pageLinks));
+      return;
+    }
+
+    const seen = new Set(stored);
+    const unseen = cards.filter((c) => !seen.has(c.dataset.link));
+    unseen.forEach((c) => c.classList.add("ai-news-unseen"));
+    persist(seen); // прунинг удалённых retention'ом карточек даже без новых просмотров
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          seen.add(e.target.dataset.link);
+          io.unobserve(e.target);
+        }
+        persist(seen);
+      },
+      { threshold: 0.6 }
+    );
+    unseen.forEach((c) => io.observe(c));
+  })();
+</script>
 
 {{- end }}{{/* end main */}}
