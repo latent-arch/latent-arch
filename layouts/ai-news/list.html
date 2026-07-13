@@ -47,8 +47,8 @@
 </style>
 
 {{/* Пометка непросмотренных карточек. Состояние — только в localStorage этого браузера
-     (переносимость между устройствами сознательно не нужна). Карточка считается просмотренной,
-     когда попала во вьюпорт; бейдж при этом живёт до следующей загрузки страницы. */}}
+     (переносимость между устройствами сознательно не нужна). Карточка считается просмотренной
+     только по клику по её ссылке (не по попаданию во вьюпорт); бейдж снимается сразу. */}}
 <script>
   (() => {
     const KEY = "ai-news-seen";
@@ -78,18 +78,17 @@
     unseen.forEach((c) => c.classList.add("ai-news-unseen"));
     persist(seen); // прунинг удалённых retention'ом карточек даже без новых просмотров
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (!e.isIntersecting) continue;
-          seen.add(e.target.dataset.link);
-          io.unobserve(e.target);
-        }
-        persist(seen);
-      },
-      { threshold: 0.6 }
-    );
-    unseen.forEach((c) => io.observe(c));
+    const markSeen = (card) => {
+      seen.add(card.dataset.link);
+      card.classList.remove("ai-news-unseen");
+      persist(seen);
+    };
+    for (const card of unseen) {
+      // auxclick — открытие средней кнопкой, тоже просмотр
+      for (const type of ["click", "auxclick"]) {
+        card.addEventListener(type, () => markSeen(card));
+      }
+    }
   })();
 </script>
 
