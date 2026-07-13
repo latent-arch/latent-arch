@@ -48,7 +48,8 @@
 
 {{/* Пометка непросмотренных карточек. Состояние — только в localStorage этого браузера
      (переносимость между устройствами сознательно не нужна). Карточка считается просмотренной
-     только по клику по её ссылке (не по попаданию во вьюпорт); бейдж снимается сразу. */}}
+     только по клику по её ссылке (не по попаданию во вьюпорт); бейдж снимается сразу.
+     При первом визите (пустой localStorage) все карточки — unseen. */}}
 <script>
   (() => {
     const KEY = "ai-news-seen";
@@ -67,13 +68,8 @@
     try {
       stored = JSON.parse(localStorage.getItem(KEY));
     } catch {}
-    if (!Array.isArray(stored)) {
-      // Первый визит (или битые данные): baseline без бейджей, иначе «новым» было бы всё
-      persist(new Set(pageLinks));
-      return;
-    }
-
-    const seen = new Set(stored);
+    // Первый визит (или битые данные) — пустой набор: все карточки считаются непросмотренными
+    const seen = new Set(Array.isArray(stored) ? stored : []);
     const unseen = cards.filter((c) => !seen.has(c.dataset.link));
     unseen.forEach((c) => c.classList.add("ai-news-unseen"));
     persist(seen); // прунинг удалённых retention'ом карточек даже без новых просмотров
