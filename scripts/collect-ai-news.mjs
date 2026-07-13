@@ -1,7 +1,8 @@
 // Сбор AI-новостей: фиды → кандидаты → LLM отбирает топ и пишет саммари → карточки в content/ai-news/.
 // Запуск: node scripts/collect-ai-news.mjs [--dry-run]
 //   --dry-run — только напечатать кандидатов (без LLM и записи файлов).
-// Env: ANTHROPIC_API_KEY (обязателен без --dry-run), WINDOW_HOURS=48, MAX_PICKS=5, MAX_CARDS=50.
+// Env: OPENROUTER_API_KEY (обязателен без --dry-run), OPENROUTER_MODEL=anthropic/claude-opus-4.8,
+//      WINDOW_HOURS=48, MAX_PICKS=5, MAX_CARDS=50.
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
@@ -13,6 +14,7 @@ const CONTENT_DIR = path.join(ROOT, "content", "ai-news");
 const SOURCES_FILE = path.join(ROOT, "scripts", "ai-news-sources.json");
 
 const DRY_RUN = process.argv.includes("--dry-run");
+const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL ?? "anthropic/claude-opus-4.8";
 const WINDOW_HOURS = Number(process.env.WINDOW_HOURS ?? 48);
 const MAX_PICKS = Number(process.env.MAX_PICKS ?? 5);
 const MAX_CARDS = Number(process.env.MAX_CARDS ?? 50);
@@ -88,8 +90,9 @@ async function fetchCandidates(knownUrls) {
 }
 
 async function curate(candidates) {
-  const { default: Anthropic } = await import("@anthropic-ai/sdk");
-  const client = new Anthropic();
+  if (!process.env.OPENROUTER_API_KEY) {
+    throw new Error("OPENROUTER_API_KEY не задан (для запуска без LLM используй --dry-run)");
+  }
 
   const list = candidates
     .map((c, i) => `[${i}] (${c.source}, ${c.date.slice(0, 10)}) ${c.title}\n${c.snippet}`)
@@ -115,30 +118,50 @@ async function curate(candidates) {
     additionalProperties: false,
   };
 
-  const response = await client.messages.create({
-    model: "claude-opus-4-8",
-    max_tokens: 8000,
-    output_config: { format: { type: "json_schema", schema } },
-    system:
-      "You curate an AI news section on a personal engineering blog (latent-arch.com). " +
-      "The audience is software engineers following AI progress. Respond with JSON only.",
-    messages: [
-      {
-        role: "user",
-        content:
-          `Below are ${candidates.length} candidate news items collected from RSS feeds. ` +
-          `Select up to ${MAX_PICKS} of the most significant ones: model releases, major product/tool launches, ` +
-          `notable research, and important industry news. Skip minor updates, marketing fluff, and listicles. ` +
-          `If several items cover the same story, pick one (prefer the primary source). ` +
-          `If fewer than ${MAX_PICKS} items are genuinely significant, pick fewer — an empty list is acceptable. ` +
-          `For each pick write a neutral 1-2 sentence English summary of what happened and why it matters.\n\n${list}`,
+  const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    method: "POST",
+    signal: AbortSignal.timeout(180000),
+    headers: {
+      authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      "content-type": "application/json",
+      "http-referer": "https://latent-arch.com",
+      "x-title": "latent-arch ai-news",
+    },
+    body: JSON.stringify({
+      model: OPENROUTER_MODEL,
+      max_tokens: 8000,
+      response_format: {
+        type: "json_schema",
+        json_schema: { name: "picks", strict: true, schema },
       },
-    ],
+      messages: [
+        {
+          role: "system",
+          content:
+            "You curate an AI news section on a personal engineering blog (latent-arch.com). " +
+            "The audience is software engineers following AI progress. Respond with JSON only.",
+        },
+        {
+          role: "user",
+          content:
+            `Below are ${candidates.length} candidate news items collected from RSS feeds. ` +
+            `Select up to ${MAX_PICKS} of the most significant ones: model releases, major product/tool launches, ` +
+            `notable research, and important industry news. Skip minor updates, marketing fluff, and listicles. ` +
+            `If several items cover the same story, pick one (prefer the primary source). ` +
+            `If fewer than ${MAX_PICKS} items are genuinely significant, pick fewer — an empty list is acceptable. ` +
+            `For each pick write a neutral 1-2 sentence English summary of what happened and why it matters.\n\n${list}`,
+        },
+      ],
+    }),
   });
-
-  if (response.stop_reason === "refusal") throw new Error("LLM refused the request");
-  const text = response.content.find((b) => b.type === "text")?.text ?? "";
-  const { picks } = JSON.parse(text);
+  if (!res.ok) {
+    throw new Error(`OpenRouter HTTP ${res.status}: ${(await res.text()).slice(0, 500)}`);
+  }
+  const data = await res.json();
+  if (data.error) throw new Error(`OpenRouter error: ${JSON.stringify(data.error).slice(0, 500)}`);
+  const text = data.choices?.[0]?.message?.content ?? "";
+  // На случай, если модель обернёт JSON в code fence, несмотря на response_format
+  const { picks } = JSON.parse(text.replace(/^\s*```(?:json)?\s*|\s*```\s*$/g, ""));
   return picks.filter((p) => Number.isInteger(p.index) && candidates[p.index] && p.summary?.trim());
 }
 

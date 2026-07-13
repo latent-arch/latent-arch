@@ -1,5 +1,5 @@
-# Ежедневный сбор AI-новостей: фиды → LLM-курация → карточки в content/ai-news/ → коммит → деплой.
-# Требует секрет ANTHROPIC_API_KEY (Settings → Secrets and variables → Actions).
+# Ежедневный сбор AI-новостей: фиды → LLM-курация через OpenRouter → карточки в content/ai-news/ → коммит → деплой.
+# Требует секрет OPENROUTER_API_KEY (Settings → Secrets and variables → Actions).
 name: Collect AI news
 
 on:
@@ -31,7 +31,7 @@ jobs:
       - name: Собрать и откурировать новости
         run: node scripts/collect-ai-news.mjs
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
 
       - name: Закоммитить карточки
         id: commit
