@@ -1,0 +1,13 @@
+{
+  "_comment": "Источники AI-новостей. name — то, что показывается на карточке (не выводится из фида). Проверяй URL фида перед добавлением: curl -sL <url> | head -c 300",
+  "sources": [
+    { "id": "openai", "url": "https://openai.com/news/rss.xml", "name": "OpenAI" },
+    { "id": "anthropic", "url": "https://tim-hilde.github.io/anthropic-rss/rss.xml", "name": "Anthropic" },
+    { "id": "deepmind", "url": "https://deepmind.google/blog/rss.xml", "name": "Google DeepMind" },
+    { "id": "google-ai", "url": "https://blog.google/technology/ai/rss/", "name": "Google AI" },
+    { "id": "huggingface", "url": "https://huggingface.co/blog/feed.xml", "name": "Hugging Face" },
+    { "id": "techcrunch-ai", "url": "https://techcrunch.com/category/artificial-intelligence/feed/", "name": "TechCrunch" },
+    { "id": "verge-ai", "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml", "name": "The Verge" },
+    { "id": "mit-tr-ai", "url": "https://www.technologyreview.com/topic/artificial-intelligence/feed", "name": "MIT Technology Review" }
+  ]
+}

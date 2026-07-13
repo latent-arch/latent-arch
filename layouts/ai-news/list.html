@@ -1,0 +1,28 @@
+{{- define "main" }}
+
+<header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>{{ .Title }}</h1>
+  {{- if .Description }}
+  <div class="post-description">
+    {{ .Description | markdownify }}
+  </div>
+  {{- end }}
+</header>
+
+{{- range .RegularPages }}
+<article class="post-entry">
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">{{ .Title }}</h2>
+  </header>
+  <div class="entry-content">
+    <p>{{ .Plain }}</p>
+  </div>
+  <footer class="entry-footer">
+    <span>{{ .Params.source }}</span>&nbsp;·&nbsp;<span>{{ .Date.Format "January 2, 2006" }}</span>
+  </footer>
+  <a class="entry-link" aria-label="Read the original post: {{ .Title | plainify }}" href="{{ .Params.link }}" target="_blank" rel="noopener"></a>
+</article>
+{{- end }}
+
+{{- end }}{{/* end main */}}

@@ -1,0 +1,55 @@
+# Ежедневный сбор AI-новостей: фиды → LLM-курация → карточки в content/ai-news/ → коммит → деплой.
+# Требует секрет ANTHROPIC_API_KEY (Settings → Secrets and variables → Actions).
+name: Collect AI news
+
+on:
+  schedule:
+    - cron: '30 5 * * *'   # ежедневно 05:30 UTC (время примерное — shared runners могут задерживать)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write   # push карточек
+  actions: write    # запуск deploy.yml (push от GITHUB_TOKEN сам не триггерит workflows)
+
+concurrency:
+  group: ai-news
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Собрать и откурировать новости
+        run: node scripts/collect-ai-news.mjs
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Закоммитить карточки
+        id: commit
+        run: |
+          git config user.name "AI News Bot"
+          git config user.email "actions@github.com"
+          git add content/ai-news/
+          if git diff --cached --quiet; then
+            echo "Новых карточек нет — пропуск"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git commit -m "ai-news: карточки $(date -u +%F)"
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Запустить деплой
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref main

@@ -48,6 +48,12 @@ theme = 'PaperMod'
     url = '/posts/'
     weight = 30
 
+  [[menu.main]]
+    identifier = 'ai-news'
+    name = 'AI News'
+    url = '/ai-news/'
+    weight = 40
+
 [outputs]
   home = ['HTML', 'RSS', 'JSON']
 
