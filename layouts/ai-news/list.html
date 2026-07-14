@@ -19,8 +19,14 @@
   <div class="entry-content">
     <p>{{ .Plain }}</p>
   </div>
+  {{/* Подпись в формате post_meta.html у карточек постов: дата · N min · автор.
+       Источник — в конце, если не совпадает с автором (автор-fallback = источник). */}}
+  {{- $card := . }}
   <footer class="entry-footer">
-    <span>{{ .Params.source }}</span>&nbsp;·&nbsp;<span>{{ .Date.Format "January 2, 2006" }}</span>
+    <span title='{{ .Date }}'>{{ .Date | time.Format (default ":date_long" site.Params.DateFormat) }}</span>
+    {{- with .Params.readingTime }}&nbsp;·&nbsp;<span>{{ i18n "read_time" . | default (printf "%d min" .) }}</span>{{- end }}
+    {{- with .Params.author }}&nbsp;·&nbsp;<span>{{ . }}</span>{{- end }}
+    {{- with .Params.source }}{{ if ne . $card.Params.author }}&nbsp;·&nbsp;<span>{{ . }}</span>{{ end }}{{- end }}
   </footer>
   <a class="entry-link" aria-label="Read the original post: {{ .Title | plainify }}" href="{{ .Params.link }}" target="_blank" rel="noopener"></a>
 </article>

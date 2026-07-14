@@ -2,6 +2,8 @@
 title: "Expanding Managed Agents in Gemini API:  background tasks, remote MCP and more"
 date: 2026-07-07T08:54:00.000Z
 source: "Google AI"
+author: "Philipp Schmid"
+readingTime: 3
 link: "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api/"
 ---
 

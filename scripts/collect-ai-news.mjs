@@ -1,6 +1,7 @@
 // Сбор AI-новостей: фиды → кандидаты → LLM отбирает топ и пишет саммари → карточки в content/ai-news/.
-// Запуск: node scripts/collect-ai-news.mjs [--dry-run]
+// Запуск: node scripts/collect-ai-news.mjs [--dry-run | --backfill]
 //   --dry-run — только напечатать кандидатов (без LLM и записи файлов).
+//   --backfill — дозаполнить author/readingTime в существующих карточках (без фидов и LLM).
 // Env: OPENROUTER_API_KEY (обязателен без --dry-run), OPENROUTER_MODEL=anthropic/claude-opus-4.8,
 //      WINDOW_HOURS=48, MAX_PICKS=5, MAX_CARDS=50.
 import fs from "node:fs";
@@ -23,8 +24,10 @@ const CONFIG = {
   maxPicks: Number(process.env.MAX_PICKS ?? 5), // сколько новостей модель отбирает за тик
   maxCards: Number(process.env.MAX_CARDS ?? 50), // retention: максимум карточек в content/ai-news/
   maxPerSource: 15, // не тащить весь бэклог фида
+  wordsPerMinute: 213, // как в Hugo .ReadingTime — чтобы «N min» совпадал с карточками постов
   // CLI
   dryRun: process.argv.includes("--dry-run"),
+  backfill: process.argv.includes("--backfill"),
 };
 
 const parser = new Parser();
@@ -51,6 +54,48 @@ function readExistingCards() {
       const date = text.match(/^date:\s*(\S+)\s*$/m)?.[1] ?? "";
       return { file: path.join(CONTENT_DIR, f), url, date };
     });
+}
+
+// Мета референснутой статьи: время чтения (по её HTML) и автор (из мета-тегов/JSON-LD).
+// Ошибка не роняет прогон — карточка просто останется без readingTime/author из статьи.
+async function fetchArticleMeta(url) {
+  let html;
+  try {
+    const res = await fetch(url, {
+      signal: AbortSignal.timeout(20000),
+      headers: {
+        "user-agent": "latent-arch-ai-news/1.0 (+https://latent-arch.com)",
+        accept: "text/html",
+      },
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    html = await res.text();
+  } catch (err) {
+    console.warn(`WARN: статья ${url} недоступна для подсчёта времени чтения: ${err.message}`);
+    return {};
+  }
+
+  let author =
+    html.match(/<meta[^>]+name=["']author["'][^>]+content=["']([^"'<>]+)["']/i)?.[1] ??
+    html.match(/<meta[^>]+content=["']([^"'<>]+)["'][^>]+name=["']author["']/i)?.[1] ??
+    html.match(/"author"\s*:\s*\{[^{}]*"name"\s*:\s*"([^"]+)"/)?.[1] ??
+    "";
+  author = author.replace(/\s+/g, " ").trim();
+  if (/^https?:/i.test(author)) author = ""; // article:author бывает URL-ом профиля
+
+  // Текст статьи: приоритет <article>, затем <main>, затем весь <body>
+  let scope =
+    html.match(/<article[\s\S]*?<\/article>/i)?.[0] ??
+    html.match(/<main[\s\S]*?<\/main>/i)?.[0] ??
+    html.match(/<body[\s\S]*<\/body>/i)?.[0] ??
+    html;
+  scope = scope
+    .replace(/<(script|style|noscript|svg|nav|header|footer|aside|form)\b[\s\S]*?<\/\1>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&[a-z#0-9]+;/gi, " ");
+  const words = scope.split(/\s+/).filter(Boolean).length;
+  const readingTime = Math.max(1, Math.ceil(words / CONFIG.wordsPerMinute));
+  return { author, readingTime };
 }
 
 async function fetchCandidates(knownUrls) {
@@ -88,6 +133,7 @@ async function fetchCandidates(knownUrls) {
         url: link,
         date: new Date(ts).toISOString(),
         source: source.name,
+        creator: (item.creator ?? item.author ?? "").replace(/\s+/g, " ").trim(),
         snippet: (item.contentSnippet ?? "").replace(/\s+/g, " ").slice(0, 500),
       });
       taken++;
@@ -203,14 +249,18 @@ async function curate(candidates) {
   return picks.filter((p) => Number.isInteger(p.index) && candidates[p.index] && p.summary?.trim());
 }
 
-function writeCard(candidate, summary) {
+function writeCard(candidate, summary, meta = {}) {
   const slug = slugify(candidate.title, candidate.url);
   const file = path.join(CONTENT_DIR, `${slug}.md`);
+  // Автор: creator из RSS → мета-теги статьи → имя источника
+  const author = candidate.creator || meta.author || candidate.source;
   const fm = [
     "---",
     `title: ${JSON.stringify(candidate.title)}`,
     `date: ${candidate.date}`,
     `source: ${JSON.stringify(candidate.source)}`,
+    `author: ${JSON.stringify(author)}`,
+    ...(meta.readingTime ? [`readingTime: ${meta.readingTime}`] : []),
     // «link», не «url»: url в Hugo front matter зарезервирован (переопределяет адрес страницы)
     `link: ${JSON.stringify(candidate.url)}`,
     "---",
@@ -222,6 +272,23 @@ function writeCard(candidate, summary) {
   return file;
 }
 
+// --backfill: дозаполнить author/readingTime в уже существующих карточках
+async function backfillCards() {
+  for (const card of readExistingCards()) {
+    const text = fs.readFileSync(card.file, "utf8");
+    if (/^author:/m.test(text) && /^readingTime:/m.test(text)) continue;
+    if (!card.url) continue;
+    const meta = await fetchArticleMeta(card.url);
+    const source = text.match(/^source:\s*"(.*)"\s*$/m)?.[1] ?? "";
+    const lines = [];
+    if (!/^author:/m.test(text)) lines.push(`author: ${JSON.stringify(meta.author || source)}`);
+    if (!/^readingTime:/m.test(text) && meta.readingTime) lines.push(`readingTime: ${meta.readingTime}`);
+    if (!lines.length) continue;
+    fs.writeFileSync(card.file, text.replace(/^link:/m, `${lines.join("\n")}\nlink:`));
+    console.log(`backfill: ${path.basename(card.file)} ← ${lines.join(", ")}`);
+  }
+}
+
 function applyRetention() {
   const cards = readExistingCards()
     .filter((c) => c.date)
@@ -231,6 +298,12 @@ function applyRetention() {
     fs.unlinkSync(cards[i].file);
     console.log(`retention: удалена старая карточка ${path.basename(cards[i].file)}`);
   }
+}
+
+if (CONFIG.backfill) {
+  await backfillCards();
+  console.log("Backfill готов");
+  process.exit(0);
 }
 
 const existing = readExistingCards();
@@ -247,7 +320,9 @@ if (candidates.length > 0) {
   console.log(`LLM отобрал: ${picks.length}`);
   fs.mkdirSync(CONTENT_DIR, { recursive: true });
   for (const pick of picks) {
-    const file = writeCard(candidates[pick.index], pick.summary);
+    const candidate = candidates[pick.index];
+    const meta = await fetchArticleMeta(candidate.url);
+    const file = writeCard(candidate, pick.summary, meta);
     console.log(`+ ${path.basename(file)}`);
   }
 }

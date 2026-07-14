@@ -2,6 +2,8 @@
 title: "Apple sues OpenAI over alleged trade secret theft"
 date: 2026-07-10T21:00:29.000Z
 source: "TechCrunch"
+author: "Sarah Perez"
+readingTime: 5
 link: "https://techcrunch.com/2026/07/10/apple-sues-openai-over-alleged-trade-secret-theft/"
 ---
 

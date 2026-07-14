@@ -2,6 +2,8 @@
 title: "Fidji Simo steps down from leading OpenAI’s AGI work due to illness"
 date: 2026-07-09T23:24:04.000Z
 source: "The Verge"
+author: "Hayden Field"
+readingTime: 3
 link: "https://www.theverge.com/ai-artificial-intelligence/963738/openai-fidji-simo-steps-down-ceo-advisor"
 ---
 

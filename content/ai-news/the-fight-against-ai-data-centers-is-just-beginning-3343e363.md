@@ -2,6 +2,8 @@
 title: "The fight against AI data centers is just beginning"
 date: 2026-07-12T12:00:00.000Z
 source: "The Verge"
+author: "The Verge"
+readingTime: 7
 link: "https://www.theverge.com/column/963346/ai-data-centers-fight"
 ---
 
