@@ -38,3 +38,5 @@ Three areas where I go deep:
 ## Get in touch
 
 - [LinkedIn](https://linkedin.com/in/denis-ilguzin)
+- [Telegram](https://t.me/ilguzin) — @ilguzin
+- [Telegram channel](https://t.me/latent_arch) — teasers and short posts from this blog
