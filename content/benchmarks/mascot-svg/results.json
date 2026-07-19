@@ -8,12 +8,28 @@
     "verdict": "Instantly readable: a proper walrus with both tusks and whiskers, an upright cello with a scroll, strings and an endpin. The f-holes went missing, and the bow — suspiciously walrus-colored — seems to have fused with the flipper holding it. Roughly 5 of 7 on the checklist."
   },
   {
+    "id": "claude-sonnet-5",
+    "slug": "anthropic/claude-sonnet-5",
+    "name": "Claude Sonnet 5",
+    "released": "2026-06-30",
+    "generatedAt": "2026-07-19",
+    "verdict": ""
+  },
+  {
     "id": "gpt-5-5",
     "slug": "openai/gpt-5.5",
     "name": "GPT-5.5",
     "released": "2026-04-24",
     "generatedAt": "2026-07-19",
     "verdict": "The most polished drawing of the batch — gradients, shading, tiny f-holes, a confident endpin. But the composition turns surreal: the cello is fused into the walrus's belly, the scroll floats above its head like a hair curl, the bow slices right through the tusks — and the walrus has no legs at all, the body just fades out below. Beautiful chaos; roughly 5 of 7."
+  },
+  {
+    "id": "gpt-5-6-luna-pro",
+    "slug": "openai/gpt-5.6-luna-pro",
+    "name": "GPT-5.6 Luna Pro",
+    "released": "2026-07-09",
+    "generatedAt": "2026-07-19",
+    "verdict": ""
   },
   {
     "id": "gemini-3-1-pro",
@@ -30,6 +46,22 @@
     "released": "2026-07-08",
     "generatedAt": "2026-07-19",
     "verdict": "Charming children's-book style, and the checklist is nearly all here: both tusks, whiskers, two proper f-holes, four strings, a tailpiece and an endpin. The cello, however, is shaped like a barrel with hoops, and the bow rests on a flipper-blob rather than being held. Roughly 5 of 7."
+  },
+  {
+    "id": "mistral-medium-3-5",
+    "slug": "mistralai/mistral-medium-3-5",
+    "name": "Mistral Medium 3.5",
+    "released": "2026-04-30",
+    "generatedAt": "2026-07-19",
+    "verdict": ""
+  },
+  {
+    "id": "glm-5",
+    "slug": "z-ai/glm-5",
+    "name": "GLM-5",
+    "released": "2026-02-11",
+    "generatedAt": "2026-07-19",
+    "verdict": ""
   },
   {
     "id": "llama-4-maverick",

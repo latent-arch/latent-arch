@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="walrusSkin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6b5b47" />
+      <stop offset="100%" stop-color="#4a3e2f" />
+    </linearGradient>
+    <linearGradient id="celloWood" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b4513" />
+      <stop offset="100%" stop-color="#654321" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#f0f8ff" />
+
+  <!-- Cello -->
+  <g transform="translate(400, 500)">
+    <!-- Cello body -->
+    <path d="M0,0 C50,-100 100,-200 150,-250 C200,-300 250,-300 300,-250 C350,-200 400,-100 400,0 C400,50 350,100 300,150 C250,200 200,200 150,150 C100,100 50,50 0,0 Z"
+          fill="url(#celloWood)" stroke="#000" stroke-width="3"/>
+
+    <!-- F-holes -->
+    <path d="M100,-50 C120,-30 140,-30 160,-50 C180,-70 180,-90 160,-110 C140,-130 120,-130 100,-110 C80,-90 80,-70 100,-50 Z"
+          fill="none" stroke="#000" stroke-width="2"/>
+    <path d="M240,-50 C260,-30 280,-30 300,-50 C320,-70 320,-90 300,-110 C280,-130 260,-130 240,-110 C220,-90 220,-70 240,-50 Z"
+          fill="none" stroke="#000" stroke-width="2"/>
+
+    <!-- Neck and scroll -->
+    <path d="M300,-250 L400,-400 L420,-400 L420,-500 L400,-500 L400,-450 Q410,-450 420,-440 L420,-400"
+          fill="url(#celloWood)" stroke="#000" stroke-width="2"/>
+    <circle cx="410" cy="-490" r="10" fill="#000"/>
+
+    <!-- Strings -->
+    <line x1="150" y1="-200" x2="420" y2="-400" stroke="#000" stroke-width="2"/>
+    <line x1="200" y1="-180" x2="420" y2="-380" stroke="#000" stroke-width="2"/>
+    <line x1="250" y1="-160" x2="420" y2="-360" stroke="#000" stroke-width="2"/>
+    <line x1="300" y1="-140" x2="420" y2="-340" stroke="#000" stroke-width="2"/>
+
+    <!-- Bridge -->
+    <path d="M250,-150 L270,-150 L270,-170 L250,-170 Z" fill="#000"/>
+
+    <!-- Endpin -->
+    <line x1="200" y1="50" x2="200" y2="100" stroke="#000" stroke-width="3"/>
+    <circle cx="200" cy="100" r="5" fill="#000"/>
+  </g>
+
+  <!-- Walrus -->
+  <g transform="translate(300, 300)">
+    <!-- Body -->
+    <ellipse cx="0" cy="0" rx="120" ry="80" fill="url(#walrusSkin)" stroke="#000" stroke-width="2"/>
+
+    <!-- Head -->
+    <circle cx="-80" cy="-50" r="60" fill="url(#walrusSkin)" stroke="#000" stroke-width="2"/>
+
+    <!-- Tusks -->
+    <path d="M-100,-30 Q-130,-60 -120,-120" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+    <path d="M-60,-30 Q-30,-60 -40,-120" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+
+    <!-- Whiskers -->
+    <line x1="-140" y1="-20" x2="-180" y2="-30" stroke="#000" stroke-width="2"/>
+    <line x1="-140" y1="0" x2="-180" y2="-10" stroke="#000" stroke-width="2"/>
+    <line x1="-140" y1="20" x2="-180" y2="10" stroke="#000" stroke-width="2"/>
+    <line x1="-140" y1="-40" x2="-180" y2="-50" stroke="#000" stroke-width="2"/>
+    <line x1="-140" y1="-10" x2="-180" y2="-20" stroke="#000" stroke-width="2"/>
+
+    <!-- Flippers -->
+    <ellipse cx="120" cy="50" rx="40" ry="20" fill="url(#walrusSkin)" stroke="#000" stroke-width="2" transform="rotate(-30 120 50)"/>
+    <ellipse cx="-120" cy="50" rx="40" ry="20" fill="url(#walrusSkin)" stroke="#000" stroke-width="2" transform="rotate(30 -120 50)"/>
+
+    <!-- Eyes -->
+    <circle cx="-100" cy="-60" r="8" fill="#000"/>
+    <circle cx="-60" cy="-60" r="8" fill="#000"/>
+
+    <!-- Nose -->
+    <circle cx="-80" cy="-40" r="6" fill="#000"/>
+
+    <!-- Bow -->
+    <path d="M150,-30 Q200,-50 250,-30" fill="none" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+    <line x1="150" y1="-30" x2="140" y2="-40" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+    <line x1="250" cy1="-30" x2="260" y2="-40" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- Bow arm -->
+    <path d="M100,-20 L150,-30" fill="none" stroke="url(#walrusSkin)" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <!-- Floor -->
+  <line x1="0" y1="550" x2="800" y2="550" stroke="#000" stroke-width="2"/>
+</svg>

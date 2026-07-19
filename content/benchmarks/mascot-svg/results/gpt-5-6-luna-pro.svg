@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <title>Walrus Playing a Cello</title>
+  <desc>A whiskered walrus with two long tusks draws a bow across the four strings of an upright cello.</desc>
+
+  <defs>
+    <linearGradient id="walrusHide" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8c756c"/>
+      <stop offset="1" stop-color="#594a48"/>
+    </linearGradient>
+    <linearGradient id="celloWood" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6f271d"/>
+      <stop offset=".5" stop-color="#bd6333"/>
+      <stop offset="1" stop-color="#70251b"/>
+    </linearGradient>
+    <linearGradient id="neckWood" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4a211a"/>
+      <stop offset=".5" stop-color="#8e4029"/>
+      <stop offset="1" stop-color="#3d1b18"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+      <feOffset dx="3" dy="5"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".25"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="800" fill="#f4ead8"/>
+  <ellipse cx="405" cy="710" rx="310" ry="24" fill="#cbbca7" opacity=".55"/>
+
+  <!-- Cello endpin and feet -->
+  <g id="endpin" stroke="#30231f" stroke-linecap="round">
+    <path d="M507 628 L507 700" stroke-width="7"/>
+    <path d="M493 700 L521 700" stroke-width="5"/>
+  </g>
+
+  <!-- Cello body -->
+  <g id="cello" filter="url(#shadow)">
+    <path id="cello-body"
+      d="M505 257
+         C472 261 451 278 452 307
+         C453 330 473 343 465 361
+         C458 377 436 385 434 417
+         C432 449 454 461 463 478
+         C448 501 443 541 451 574
+         C460 613 477 635 505 646
+         C533 635 550 613 559 574
+         C567 541 562 501 547 478
+         C556 461 578 449 576 417
+         C574 385 552 377 545 361
+         C537 343 557 330 558 307
+         C559 278 538 261 505 257 Z"
+      fill="url(#celloWood)" stroke="#451c18" stroke-width="6"/>
+
+    <!-- neck, fingerboard, pegbox and scroll -->
+    <path d="M488 270 L488 145 Q488 128 501 121 L517 121 Q528 130 528 145 L523 270 Z"
+          fill="url(#neckWood)" stroke="#351917" stroke-width="5"/>
+    <path d="M497 252 L497 151 L518 151 L518 252 Z" fill="#211817"/>
+    <path d="M491 143 Q472 134 480 117 Q486 103 502 108 Q520 93 535 108 Q546 123 530 137 Q518 148 491 143 Z"
+          fill="#603023" stroke="#351917" stroke-width="5"/>
+    <circle cx="496" cy="119" r="5" fill="#bd7540"/>
+    <circle cx="525" cy="119" r="5" fill="#bd7540"/>
+    <path d="M487 169 L528 169 M487 187 L528 187 M487 205 L528 205 M487 223 L528 223"
+          stroke="#b87952" stroke-width="2" opacity=".7"/>
+
+    <!-- cello bridge -->
+    <path d="M466 464 Q505 452 544 464 L541 491 Q505 480 469 491 Z"
+          fill="#e6bd78" stroke="#75452b" stroke-width="3"/>
+    <path d="M475 463 L474 488 M535 463 L536 488" stroke="#75452b" stroke-width="3"/>
+
+    <!-- tailpiece -->
+    <path d="M485 505 Q505 516 525 505 L531 581 Q505 596 479 581 Z"
+          fill="#2b1d1b" stroke="#160f0e" stroke-width="3"/>
+
+    <!-- four strings -->
+    <g id="four-strings" stroke="#f0d9a0" stroke-width="2">
+      <path d="M498 132 L498 468 L492 570"/>
+      <path d="M503 132 L503 467 L501 576"/>
+      <path d="M508 132 L508 467 L509 576"/>
+      <path d="M513 132 L513 468 L518 570"/>
+    </g>
+
+    <!-- f-holes -->
+    <g id="f-holes" fill="none" stroke="#2b1513" stroke-width="6" stroke-linecap="round">
+      <path d="M474 354 C458 371 464 391 475 402 C484 412 479 427 472 438"/>
+      <path d="M536 354 C552 371 546 391 535 402 C526 412 531 427 538 438"/>
+    </g>
+    <g stroke="#2b1513" stroke-width="4">
+      <path d="M469 374 L481 374 M529 374 L541 374"/>
+      <path d="M469 426 L481 426 M529 426 L541 426"/>
+    </g>
+
+    <!-- decorative cello purfling -->
+    <path d="M474 286 Q454 327 480 350 M536 286 Q556 327 530 350"
+          fill="none" stroke="#e2a05b" stroke-width="3" opacity=".65"/>
+  </g>
+
+  <!-- Walrus body -->
+  <g id="walrus" filter="url(#shadow)">
+    <ellipse cx="245" cy="527" rx="126" ry="132" fill="url(#walrusHide)" stroke="#443735" stroke-width="6"/>
+    <ellipse cx="218" cy="617" rx="91" ry="43" fill="#665452" opacity=".8"/>
+
+    <!-- rear flipper -->
+    <path d="M160 548 Q108 570 105 631 Q112 665 137 653 Q165 620 192 572 Z"
+          fill="#6b5754" stroke="#443735" stroke-width="6"/>
+
+    <!-- head -->
+    <ellipse cx="228" cy="293" rx="112" ry="94" fill="url(#walrusHide)" stroke="#443735" stroke-width="6"/>
+    <ellipse cx="228" cy="344" rx="79" ry="54" fill="#806866"/>
+    <ellipse cx="228" cy="319" rx="28" ry="20" fill="#302221"/>
+    <ellipse cx="219" cy="314" rx="7" ry="5" fill="#d6b6a0"/>
+    <circle cx="182" cy="278" r="8" fill="#1d1716"/>
+    <circle cx="273" cy="278" r="8" fill="#1d1716"/>
+    <circle cx="179" cy="275" r="2.5" fill="white"/>
+    <circle cx="270" cy="275" r="2.5" fill="white"/>
+
+    <!-- two long tusks -->
+    <path d="M186 348 Q164 397 181 451 Q192 469 202 448 Q210 397 205 351 Z"
+          fill="#f5e4bd" stroke="#6f5142" stroke-width="4"/>
+    <path d="M270 348 Q292 397 275 451 Q264 469 254 448 Q246 397 251 351 Z"
+          fill="#f5e4bd" stroke="#6f5142" stroke-width="4"/>
+
+    <!-- visible whiskers -->
+    <g id="whiskers" fill="none" stroke="#463b38" stroke-width="3" stroke-linecap="round">
+      <path d="M203 333 Q151 322 117 300"/>
+      <path d="M201 340 Q145 343 107 333"/>
+      <path d="M202 348 Q150 366 114 369"/>
+      <path d="M253 333 Q306 321 341 299"/>
+      <path d="M255 340 Q310 343 350 331"/>
+      <path d="M254 348 Q306 366 343 370"/>
+    </g>
+
+    <!-- left flipper holding the bow -->
+    <path d="M311 428 Q350 406 398 414 Q427 419 444 438
+             Q450 451 436 460 Q403 466 373 449
+             Q341 459 313 465 Q296 459 300 445 Z"
+          fill="#725d5a" stroke="#443735" stroke-width="6"/>
+    <path d="M383 430 Q408 434 431 449" fill="none" stroke="#a4867c" stroke-width="4"/>
+
+    <!-- other flipper -->
+    <path d="M319 524 Q365 536 386 568 Q393 586 377 595
+             Q349 590 320 567 Q295 547 300 532 Z"
+          fill="#725d5a" stroke="#443735" stroke-width="6"/>
+  </g>
+
+  <!-- Bow being drawn across the cello strings -->
+  <g id="bow" fill="none" stroke-linecap="round">
+    <!-- bow hair -->
+    <path d="M310 441 Q449 429 624 425" stroke="#eee2bd" stroke-width="7"/>
+    <!-- bow stick -->
+    <path d="M302 429 Q451 416 629 412" stroke="#54291d" stroke-width="9"/>
+    <path d="M302 429 Q451 416 629 412" stroke="#c47b3f" stroke-width="3"/>
+    <!-- frog and tip -->
+    <path d="M300 418 L322 427 L317 445 L296 437 Z"
+          fill="#30201b" stroke="#30201b" stroke-width="3"/>
+    <path d="M624 404 L641 411 L626 421" stroke="#30201b" stroke-width="5"/>
+  </g>
+
+  <!-- hand gripping bow, foreground -->
+  <path d="M406 421 Q421 413 437 421 Q448 429 441 442
+           Q432 453 417 447 Q405 440 406 421 Z"
+        fill="#806864" stroke="#443735" stroke-width="5"/>
+</svg>

@@ -1,0 +1,139 @@
+<svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="500" height="600" fill="#f5f0e6"/>
+  
+  <!-- Floor shadow -->
+  <ellipse cx="250" cy="580" rx="180" ry="15" fill="#d4cfc5" opacity="0.5"/>
+  
+  <!-- Cello -->
+  <!-- Endpin -->
+  <line x1="320" y1="520" x2="320" y2="575" stroke="#4a4a4a" stroke-width="4"/>
+  <circle cx="320" cy="575" r="5" fill="#3a3a3a"/>
+  
+  <!-- Cello body -->
+  <path d="M280 520 
+           Q230 480 235 420 
+           Q200 380 210 320 
+           Q190 260 230 220 
+           Q260 190 280 200
+           Q300 190 330 220
+           Q370 260 350 320
+           Q360 380 325 420
+           Q330 480 280 520 Z" 
+        fill="#8B4513" stroke="#5D2E0C" stroke-width="3"/>
+  
+  <!-- Cello body inner highlight -->
+  <path d="M285 510 
+           Q245 475 250 420 
+           Q220 380 230 320 
+           Q215 270 250 235
+           Q280 210 285 220
+           Q290 210 320 235
+           Q355 270 340 320
+           Q350 380 320 420
+           Q325 475 285 510 Z" 
+        fill="#A0522D" opacity="0.6"/>
+  
+  <!-- F-holes -->
+  <path d="M250 300 Q245 320 255 340 Q250 360 260 380" 
+        fill="none" stroke="#2a1a0a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M310 300 Q315 320 305 340 Q310 360 300 380" 
+        fill="none" stroke="#2a1a0a" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Bridge -->
+  <path d="M250 395 L255 380 L265 385 L275 385 L285 380 L290 395" 
+        fill="#3a2010" stroke="#2a1a0a" stroke-width="1"/>
+  
+  <!-- Strings -->
+  <line x1="258" y1="200" x2="260" y2="500" stroke="#d4a574" stroke-width="1.5"/>
+  <line x1="272" y1="200" x2="273" y2="500" stroke="#c9956b" stroke-width="1.5"/>
+  <line x1="286" y1="200" x2="287" y2="500" stroke="#be8540" stroke-width="1.5"/>
+  <line x1="300" y1="200" x2="301" y2="500" stroke="#b07530" stroke-width="1.5"/>
+  
+  <!-- Tailpiece -->
+  <path d="M255 480 L310 480 L305 510 L260 510 Z" fill="#2a1a0a"/>
+  
+  <!-- Neck and scroll -->
+  <rect x="268" y="120" width="24" height="85" fill="#5D2E0C" rx="3"/>
+  <ellipse cx="280" cy="115" rx="18" ry="20" fill="#5D2E0C"/>
+  <path d="M265 100 Q280 85 295 100 Q290 110 280 115 Q270 110 265 100" fill="#5D2E0C"/>
+  
+  <!-- Tuning pegs -->
+  <rect x="262" y="130" width="8" height="4" rx="2" fill="#2a1a0a"/>
+  <rect x="290" y="130" width="8" height="4" rx="2" fill="#2a1a0a"/>
+  <rect x="262" y="145" width="8" height="4" rx="2" fill="#2a1a0a"/>
+  <rect x="290" y="145" width="8" height="4" rx="2" fill="#2a1a0a"/>
+  
+  <!-- Walrus body -->
+  <ellipse cx="180" cy="380" rx="90" ry="120" fill="#6b6b6b"/>
+  <ellipse cx="180" cy="380" rx="80" ry="105" fill="#7a7a7a"/>
+  
+  <!-- Walrus head -->
+  <ellipse cx="170" cy="260" rx="70" ry="60" fill="#6b6b6b"/>
+  <ellipse cx="170" cy="265" rx="65" ry="55" fill="#787878"/>
+  
+  <!-- Snout -->
+  <ellipse cx="175" cy="285" rx="40" ry="30" fill="#8a8a8a"/>
+  
+  <!-- Whiskers -->
+  <g stroke="#4a4a4a" stroke-width="2" fill="none">
+    <!-- Left whiskers -->
+    <path d="M135 275 Q100 270 70 265"/>
+    <path d="M138 285 Q105 285 65 290"/>
+    <path d="M140 295 Q110 300 75 310"/>
+    <!-- Right whiskers -->
+    <path d="M215 275 Q250 270 280 265"/>
+    <path d="M212 285 Q245 285 285 290"/>
+    <path d="M210 295 Q240 300 275 310"/>
+  </g>
+  
+  <!-- Whisker dots -->
+  <circle cx="145" cy="278" r="3" fill="#5a5a5a"/>
+  <circle cx="145" cy="288" r="3" fill="#5a5a5a"/>
+  <circle cx="145" cy="298" r="3" fill="#5a5a5a"/>
+  <circle cx="205" cy="278" r="3" fill="#5a5a5a"/>
+  <circle cx="205" cy="288" r="3" fill="#5a5a5a"/>
+  <circle cx="205" cy="298" r="3" fill="#5a5a5a"/>
+  
+  <!-- Tusks -->
+  <path d="M155 310 Q140 340 130 420 Q125 450 135 460" 
+        fill="none" stroke="#f5f0dc" stroke-width="12" stroke-linecap="round"/>
+  <path d="M195 310 Q210 340 220 420 Q225 450 215 460" 
+        fill="none" stroke="#f5f0dc" stroke-width="12" stroke-linecap="round"/>
+  <!-- Tusk shading -->
+  <path d="M155 310 Q140 340 130 420 Q125 450 135 460" 
+        fill="none" stroke="#e8e0c8" stroke-width="8" stroke-linecap="round"/>
+  <path d="M195 310 Q210 340 220 420 Q225 450 215 460" 
+        fill="none" stroke="#e8e0c8" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Eyes -->
+  <ellipse cx="140" cy="240" rx="12" ry="10" fill="#2a2a2a"/>
+  <ellipse cx="200" cy="240" rx="12" ry="10" fill="#2a2a2a"/>
+  <circle cx="143" cy="238" r="4" fill="#ffffff"/>
+  <circle cx="203" cy="238" r="4" fill="#ffffff"/>
+  
+  <!-- Nose -->
+  <ellipse cx="175" cy="265" rx="12" ry="8" fill="#5a5a5a"/>
+  
+  <!-- Front flipper holding bow -->
+  <ellipse cx="230" cy="340" rx="35" ry="25" fill="#5a5a5a" transform="rotate(-20, 230, 340)"/>
+  
+  <!-- Bow -->
+  <line x1="290" y1="300" x2="420" y2="200" stroke="#5D2E0C" stroke-width="5" stroke-linecap="round"/>
+  <line x1="290" y1="300" x2="420" y2="200" stroke="#8B4513" stroke-width="3"/>
+  <!-- Bow hair -->
+  <line x1="292" y1="302" x2="418" y2="205" stroke="#e8dcc8" stroke-width="2"/>
+  <!-- Bow tip -->
+  <rect x="415" y="195" width="15" height="12" rx="2" fill="#2a1a0a" transform="rotate(-38, 420, 200)"/>
+  <!-- Bow frog -->
+  <rect x="280" y="295" width="20" height="15" rx="2" fill="#2a1a0a" transform="rotate(-38, 290, 300)"/>
+  
+  <!-- Flipper gripping bow -->
+  <ellipse cx="300" cy="285" rx="20" ry="15" fill="#6b6b6b" transform="rotate(-30, 300, 285)"/>
+  
+  <!-- Back flipper visible -->
+  <ellipse cx="120" cy="480" rx="50" ry="25" fill="#5a5a5a" transform="rotate(10, 120, 480)"/>
+  <path d="M90 490 Q110 500 140 495" stroke="#4a4a4a" stroke-width="3" fill="none"/>
+  <path d="M85 485 Q105 492 135 490" stroke="#4a4a4a" stroke-width="3" fill="none"/>
+  <path d="M80 480 Q100 485 130 485" stroke="#4a4a4a" stroke-width="3" fill="none"/>
+</svg>
