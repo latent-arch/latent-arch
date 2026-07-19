@@ -1,8 +1,10 @@
-Пропуск (результат уже есть): claude-opus-4-8, gpt-5-5, gemini-3-1-pro, grok-4-5
+Пропуск (результат уже есть): claude-opus-4-8, gpt-5-5, gemini-3-1-pro, grok-4-5, llama-4-maverick, gpt-oss-120b, qwen3-6-35b
+Claude Sonnet 5 (anthropic/claude-sonnet-5)... ok
+GPT-5.6 Luna Pro (openai/gpt-5.6-luna-pro)... ok
+Qwen3.7 Max (qwen/qwen3.7-max)... ошибка (таймаут вызова (4 мин)) — оставляю прежний результат, если был
+Mistral Medium 3.5 (mistralai/mistral-medium-3-5)... ok
+MiniMax M3 (minimax/minimax-m3)... ошибка (таймаут вызова (4 мин)) — оставляю прежний результат, если был
 Kimi K3 (moonshotai/kimi-k3)... ошибка (таймаут вызова (4 мин)) — оставляю прежний результат, если был
-GLM-5 (z-ai/glm-5)... ошибка (таймаут вызова (4 мин)) — оставляю прежний результат, если был
-Llama 4 Maverick (meta-llama/llama-4-maverick)... ok
-GPT-OSS 120B (openai/gpt-oss-120b)... ok
-Qwen3.6 35B-A3B (qwen/qwen3.6-35b-a3b)... ok
+GLM-5 (z-ai/glm-5)... ok
 
-Готово: 3/5 новых, в results.json 7 моделей
+Готово: 4/7 новых, в results.json 11 моделей
