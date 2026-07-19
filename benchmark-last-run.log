@@ -1,0 +1,6 @@
+Gemini 3.1 Pro (google/gemini-3.1-pro-preview)... ok
+Grok 4.5 (x-ai/grok-4.5)... ok
+DeepSeek V4 Pro (deepseek/deepseek-v4-pro)... ошибка (в ответе нет <svg> (начало ответа: Here’s an SVG illustration of a walrus playing a cello, with the bow drawn across the strings using its flipper.
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" heigh)) — оставляю прежний результат, если был
+Kimi K3 (moonshotai/kimi-k3)... 
