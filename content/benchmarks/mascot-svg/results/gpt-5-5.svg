@@ -1,0 +1,197 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800" role="img" aria-labelledby="title desc">
+  <title id="title">Walrus playing a cello</title>
+  <desc id="desc">A cartoon walrus with long tusks and whiskers draws a bow across the strings of an upright cello with f-holes, bridge, four strings, and endpin.</desc>
+
+  <defs>
+    <linearGradient id="celloWood" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#b96d2d"/>
+      <stop offset="50%" stop-color="#d9903d"/>
+      <stop offset="100%" stop-color="#8f4d1f"/>
+    </linearGradient>
+    <linearGradient id="walrusFur" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9b6a43"/>
+      <stop offset="100%" stop-color="#6f472e"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="800" fill="#f3ead7"/>
+  <ellipse cx="400" cy="750" rx="260" ry="28" fill="#d8c7aa"/>
+
+  <!-- Walrus body behind cello -->
+  <ellipse cx="330" cy="505" rx="190" ry="230" fill="url(#walrusFur)" stroke="#4d2f1f" stroke-width="5" filter="url(#softShadow)"/>
+  <ellipse cx="260" cy="545" rx="70" ry="120" fill="#805639" opacity="0.55"/>
+  <ellipse cx="390" cy="560" rx="75" ry="130" fill="#805639" opacity="0.45"/>
+
+  <!-- Walrus flippers -->
+  <path d="M240 470 C155 480 120 545 143 600 C163 648 233 615 278 545 C302 507 291 476 240 470Z"
+        fill="#7a5035" stroke="#4d2f1f" stroke-width="5"/>
+  <path d="M440 458 C520 435 585 410 632 392 C665 379 682 410 656 432 C598 482 514 511 456 516 C417 519 404 470 440 458Z"
+        fill="#7a5035" stroke="#4d2f1f" stroke-width="5"/>
+
+  <!-- Cello upright -->
+  <!-- Endpin -->
+  <line x1="430" y1="675" x2="430" y2="765" stroke="#2b2927" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="430" cy="766" r="6" fill="#2b2927"/>
+
+  <!-- Cello body with curved upper bouts, narrow waist, and wide lower bouts -->
+  <path d="
+    M430 306
+    C378 305 350 337 356 380
+    C360 408 336 424 306 440
+    C265 462 256 530 286 591
+    C312 645 361 672 430 672
+    C499 672 548 645 574 591
+    C604 530 595 462 554 440
+    C524 424 500 408 504 380
+    C510 337 482 305 430 306
+    Z"
+    fill="url(#celloWood)" stroke="#4b2411" stroke-width="7" filter="url(#softShadow)"/>
+
+  <!-- Cello center seam and purfling -->
+  <path d="M430 315 C425 405 425 575 430 665" fill="none" stroke="#6e3518" stroke-width="2" opacity="0.55"/>
+  <path d="
+    M430 324
+    C388 323 370 345 374 381
+    C378 417 347 432 322 449
+    C291 471 282 527 306 581
+    C328 628 372 650 430 650
+    C488 650 532 628 554 581
+    C578 527 569 471 538 449
+    C513 432 482 417 486 381
+    C490 345 472 323 430 324"
+    fill="none" stroke="#f0bc6b" stroke-width="3" opacity="0.6"/>
+
+  <!-- Neck, fingerboard, pegbox, scroll -->
+  <rect x="414" y="190" width="32" height="128" rx="8" fill="#6b3518" stroke="#3b1d0d" stroke-width="4"/>
+  <path d="M408 298 L452 298 L443 560 L417 560 Z" fill="#211916" stroke="#080606" stroke-width="3"/>
+  <path d="M407 170 C405 142 428 128 451 143 C470 156 464 185 440 187 C425 189 417 181 423 170 C429 160 443 164 444 174"
+        fill="none" stroke="#3b1d0d" stroke-width="11" stroke-linecap="round"/>
+  <path d="M405 178 C385 174 378 158 390 145 C402 132 423 139 421 158"
+        fill="none" stroke="#3b1d0d" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="395" cy="206" r="9" fill="#2b1710"/>
+  <circle cx="465" cy="206" r="9" fill="#2b1710"/>
+  <circle cx="394" cy="235" r="9" fill="#2b1710"/>
+  <circle cx="466" cy="235" r="9" fill="#2b1710"/>
+
+  <!-- Tailpiece -->
+  <path d="M407 570 C407 625 414 655 430 665 C446 655 453 625 453 570 Z"
+        fill="#241412" stroke="#090505" stroke-width="3"/>
+  <circle cx="430" cy="670" r="7" fill="#120908"/>
+
+  <!-- Bridge -->
+  <path d="M386 492
+           C397 475 416 468 430 470
+           C444 468 463 475 474 492
+           L466 506
+           C456 499 444 497 430 498
+           C416 497 404 499 394 506
+           Z"
+        fill="#f1c681" stroke="#6d3a1c" stroke-width="3"/>
+  <path d="M405 506 L397 536" stroke="#6d3a1c" stroke-width="4" stroke-linecap="round"/>
+  <path d="M455 506 L463 536" stroke="#6d3a1c" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="418" cy="490" r="5" fill="#8b5224"/>
+  <circle cx="442" cy="490" r="5" fill="#8b5224"/>
+
+  <!-- Four cello strings -->
+  <line x1="418" y1="190" x2="411" y2="630" stroke="#e9e0d4" stroke-width="2"/>
+  <line x1="426" y1="188" x2="424" y2="638" stroke="#d7d0c8" stroke-width="2"/>
+  <line x1="434" y1="188" x2="436" y2="638" stroke="#c8c0b7" stroke-width="2"/>
+  <line x1="442" y1="190" x2="449" y2="630" stroke="#b7afa6" stroke-width="2"/>
+
+  <!-- F-holes -->
+  <path d="M374 425
+           C352 438 354 471 374 480
+           M382 400
+           C365 426 364 468 384 501
+           M358 419 L385 419
+           M361 488 L388 488"
+        fill="none" stroke="#1d0f09" stroke-width="7" stroke-linecap="round"/>
+  <path d="M486 425
+           C508 438 506 471 486 480
+           M478 400
+           C495 426 496 468 476 501
+           M502 419 L475 419
+           M499 488 L472 488"
+        fill="none" stroke="#1d0f09" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Walrus head in front/above cello -->
+  <ellipse cx="330" cy="245" rx="125" ry="105" fill="#9b6a43" stroke="#4d2f1f" stroke-width="5"/>
+  <ellipse cx="285" cy="230" rx="23" ry="20" fill="#3c2217"/>
+  <ellipse cx="375" cy="230" rx="23" ry="20" fill="#3c2217"/>
+  <circle cx="292" cy="224" r="6" fill="#fff"/>
+  <circle cx="382" cy="224" r="6" fill="#fff"/>
+
+  <!-- Brow and nose -->
+  <path d="M264 202 C280 193 298 193 313 204" fill="none" stroke="#4d2f1f" stroke-width="6" stroke-linecap="round"/>
+  <path d="M347 204 C364 193 383 194 397 205" fill="none" stroke="#4d2f1f" stroke-width="6" stroke-linecap="round"/>
+  <ellipse cx="330" cy="267" rx="34" ry="24" fill="#3a2016"/>
+  <circle cx="318" cy="262" r="5" fill="#111"/>
+  <circle cx="342" cy="262" r="5" fill="#111"/>
+
+  <!-- Muzzle pads -->
+  <ellipse cx="296" cy="300" rx="50" ry="43" fill="#b98a61" stroke="#6b452c" stroke-width="3"/>
+  <ellipse cx="364" cy="300" rx="50" ry="43" fill="#b98a61" stroke="#6b452c" stroke-width="3"/>
+  <path d="M305 330 C322 344 340 344 357 330" fill="none" stroke="#4d2f1f" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Visible whiskers -->
+  <g stroke="#f5ead8" stroke-width="3" stroke-linecap="round">
+    <line x1="290" y1="286" x2="207" y2="260"/>
+    <line x1="291" y1="300" x2="200" y2="300"/>
+    <line x1="292" y1="314" x2="210" y2="340"/>
+    <line x1="370" y1="286" x2="453" y2="260"/>
+    <line x1="369" y1="300" x2="460" y2="300"/>
+    <line x1="368" y1="314" x2="450" y2="340"/>
+  </g>
+  <g stroke="#4d2f1f" stroke-width="2" stroke-linecap="round" opacity="0.5">
+    <line x1="287" y1="292" x2="220" y2="280"/>
+    <line x1="373" y1="292" x2="440" y2="280"/>
+  </g>
+
+  <!-- Two long tusks -->
+  <path d="M305 323
+           C295 385 283 441 260 505
+           C253 525 278 531 288 511
+           C319 448 329 381 321 324 Z"
+        fill="#fff7dd" stroke="#b9a777" stroke-width="4"/>
+  <path d="M355 323
+           C365 385 377 441 400 505
+           C407 525 382 531 372 511
+           C341 448 331 381 339 324 Z"
+        fill="#fff7dd" stroke="#b9a777" stroke-width="4"/>
+  <path d="M282 500 C296 459 305 404 309 336" fill="none" stroke="#e4d6a8" stroke-width="2"/>
+  <path d="M378 500 C364 459 355 404 351 336" fill="none" stroke="#e4d6a8" stroke-width="2"/>
+
+  <!-- Bow held by flipper, clearly crossing the strings -->
+  <g transform="rotate(-9 430 448)">
+    <line x1="218" y1="448" x2="642" y2="448" stroke="#3a2115" stroke-width="6" stroke-linecap="round"/>
+    <line x1="230" y1="459" x2="630" y2="459" stroke="#efe6d8" stroke-width="4" stroke-linecap="round"/>
+    <line x1="230" y1="438" x2="630" y2="438" stroke="#6b3b20" stroke-width="2" stroke-linecap="round"/>
+    <rect x="220" y="435" width="30" height="28" rx="6" fill="#2a1710" stroke="#100806" stroke-width="2"/>
+    <circle cx="635" cy="448" r="8" fill="#2a1710"/>
+  </g>
+
+  <!-- Front gripping flipper over bow -->
+  <path d="M584 395
+           C604 380 641 380 657 400
+           C675 424 646 449 617 438
+           C592 429 574 415 584 395Z"
+        fill="#7a5035" stroke="#4d2f1f" stroke-width="5"/>
+  <path d="M604 407 C619 413 633 413 648 406" fill="none" stroke="#4d2f1f" stroke-width="3" stroke-linecap="round"/>
+  <path d="M600 421 C617 428 632 427 646 419" fill="none" stroke="#4d2f1f" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- A second flipper near cello neck for playing posture -->
+  <path d="M257 400
+           C291 378 337 379 359 404
+           C378 426 354 452 321 444
+           C289 436 263 424 257 400Z"
+        fill="#7a5035" stroke="#4d2f1f" stroke-width="5"/>
+  <path d="M313 405 C323 417 329 429 331 442" fill="none" stroke="#4d2f1f" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Small highlights on cello -->
+  <path d="M331 461 C305 500 311 565 345 609" fill="none" stroke="#f2b15a" stroke-width="8" opacity="0.25" stroke-linecap="round"/>
+  <path d="M511 455 C545 505 535 578 493 621" fill="none" stroke="#5f2c13" stroke-width="8" opacity="0.22" stroke-linecap="round"/>
+</svg>

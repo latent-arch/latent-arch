@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <!-- Background -->
+  <rect width="500" height="500" fill="#e6f2f7"/>
+  <rect y="400" width="500" height="100" fill="#c9a876"/>
+
+  <!-- ===== CELLO ===== -->
+  <g id="cello">
+    <!-- Endpin -->
+    <line x1="300" y1="470" x2="300" y2="430" stroke="#555" stroke-width="4"/>
+    <circle cx="300" cy="472" r="4" fill="#333"/>
+
+    <!-- Cello body (curved figure-8 shape) -->
+    <path d="M300,430 
+             C270,430 255,410 258,385
+             C260,365 275,360 275,345
+             C275,335 262,330 260,315
+             C257,295 275,275 300,275
+             C325,275 343,295 340,315
+             C338,330 325,335 325,345
+             C325,360 340,365 342,385
+             C345,410 330,430 300,430 Z"
+          fill="#8b3a1a" stroke="#5a230d" stroke-width="3"/>
+
+    <!-- Body highlight -->
+    <path d="M285,290 C270,300 268,340 278,370 C270,395 280,415 290,420"
+          fill="none" stroke="#a34a26" stroke-width="4" opacity="0.5"/>
+
+    <!-- F-holes -->
+    <path d="M283,335 C278,340 279,355 283,362 C280,366 281,372 284,373 M281,332 C284,331 285,333 284,335"
+          fill="none" stroke="#2a1006" stroke-width="2.5"/>
+    <path d="M317,335 C322,340 321,355 317,362 C320,366 319,372 316,373 M319,332 C316,331 315,333 316,335"
+          fill="none" stroke="#2a1006" stroke-width="2.5"/>
+
+    <!-- Bridge -->
+    <path d="M290,365 L288,375 L312,375 L310,365 Z" fill="#d4a76a" stroke="#8b6b3a" stroke-width="1"/>
+
+    <!-- Neck / Fingerboard -->
+    <rect x="293" y="180" width="14" height="100" fill="#2a1a10" stroke="#1a0f08" stroke-width="1"/>
+
+    <!-- Scroll / Pegbox -->
+    <rect x="293" y="150" width="14" height="35" fill="#5a3a20"/>
+    <path d="M300,150 C288,148 285,158 290,165 C293,160 300,162 300,167
+             C300,162 307,160 310,165 C315,158 312,148 300,150 Z"
+          fill="#6b4525" stroke="#3a2412" stroke-width="1.5"/>
+    <!-- Tuning pegs -->
+    <line x1="288" y1="158" x2="298" y2="158" stroke="#2a1a10" stroke-width="3"/>
+    <line x1="288" y1="168" x2="298" y2="168" stroke="#2a1a10" stroke-width="3"/>
+    <line x1="302" y1="158" x2="312" y2="158" stroke="#2a1a10" stroke-width="3"/>
+    <line x1="302" y1="168" x2="312" y2="168" stroke="#2a1a10" stroke-width="3"/>
+
+    <!-- Strings (4) from pegbox over bridge to tailpiece -->
+    <line x1="296" y1="175" x2="294" y2="370" stroke="#e8e8e8" stroke-width="1"/>
+    <line x1="298.5" y1="175" x2="298" y2="370" stroke="#e8e8e8" stroke-width="1"/>
+    <line x1="301.5" y1="175" x2="302" y2="370" stroke="#e8e8e8" stroke-width="1"/>
+    <line x1="304" y1="175" x2="306" y2="370" stroke="#e8e8e8" stroke-width="1"/>
+
+    <!-- Tailpiece -->
+    <path d="M296,375 L304,375 L306,405 L294,405 Z" fill="#2a1a10"/>
+  </g>
+
+  <!-- ===== BOW ===== -->
+  <!-- drawn across strings near the bridge, held by right flipper -->
+  <g id="bow">
+    <line x1="230" y1="340" x2="410" y2="355" stroke="#6b4525" stroke-width="4"/>
+    <line x1="232" y1="345" x2="408" y2="360" stroke="#f0f0e0" stroke-width="1.5"/>
+    <rect x="405" y="350" width="10" height="10" rx="2" fill="#333"/>
+  </g>
+
+  <!-- ===== WALRUS ===== -->
+  <g id="walrus">
+    <!-- Body -->
+    <ellipse cx="180" cy="360" rx="90" ry="80" fill="#9a7b6a" stroke="#6b5445" stroke-width="3"/>
+    <!-- Belly -->
+    <ellipse cx="185" cy="380" rx="55" ry="55" fill="#b39585"/>
+
+    <!-- Tail flipper -->
+    <path d="M100,410 C70,420 60,440 80,445 C95,442 105,430 110,420 Z"
+          fill="#8a6b5a" stroke="#6b5445" stroke-width="2"/>
+
+    <!-- Left flipper (holding cello neck) reaching up -->
+    <path d="M240,300 C260,270 280,240 293,215 C300,220 302,230 297,238 
+             C285,265 270,300 255,320 C248,318 242,310 240,300 Z"
+          fill="#8a6b5a" stroke="#6b5445" stroke-width="2.5"/>
+
+    <!-- Right flipper (holding bow) -->
+    <path d="M230,360 C270,350 320,345 400,353 C405,357 405,363 400,367
+             C320,362 270,375 235,380 C228,375 226,365 230,360 Z"
+          fill="#8a6b5a" stroke="#6b5445" stroke-width="2.5"/>
+
+    <!-- Head -->
+    <circle cx="150" cy="250" r="60" fill="#9a7b6a" stroke="#6b5445" stroke-width="3"/>
+
+    <!-- Snout / muzzle -->
+    <ellipse cx="140" cy="285" rx="45" ry="38" fill="#b89888" stroke="#6b5445" stroke-width="2"/>
+
+    <!-- Nostrils -->
+    <ellipse cx="128" cy="272" rx="5" ry="8" fill="#4a3428"/>
+    <ellipse cx="152" cy="272" rx="5" ry="8" fill="#4a3428"/>
+
+    <!-- Eyes -->
+    <circle cx="128" cy="230" r="9" fill="#fff" stroke="#4a3428" stroke-width="1.5"/>
+    <circle cx="130" cy="232" r="5" fill="#2a1a10"/>
+    <circle cx="168" cy="230" r="9" fill="#fff" stroke="#4a3428" stroke-width="1.5"/>
+    <circle cx="170" cy="232" r="5" fill="#2a1a10"/>
+
+    <!-- Tusks (two long) -->
+    <path d="M126,300 C122,330 120,360 122,385 C126,386 130,385 132,382 C133,350 132,320 133,302 Z"
+          fill="#f5f0e0" stroke="#c9bфa0" stroke-width="1.5"/>
+    <path d="M154,300 C158,330 160,360 158,385 C154,386 150,385 148,382 C147,350 148,320 147,302 Z"
+          fill="#f5f0e0" stroke="#c9baa0" stroke-width="1.5"/>
+
+    <!-- Whiskers (left side) -->
+    <g stroke="#4a3428" stroke-width="1.2" fill="none">
+      <path d="M110,282 C90,280 75,282 62,286"/>
+      <path d="M110,288 C90,289 75,293 60,298"/>
+      <path d="M110,294 C92,297 78,303 65,310"/>
+      <!-- Whiskers (right side) -->
+      <path d="M172,282 C192,280 207,282 220,286"/>
+      <path d="M172,288 C192,289 207,293 222,298"/>
+      <path d="M172,294 C190,297 204,303 217,310"/>
+    </g>
+
+    <!-- Whisker dots -->
+    <g fill="#6b5445">
+      <circle cx="118" cy="283" r="1.5"/>
+      <circle cx="116" cy="290" r="1.5"/>
+      <circle cx="164" cy="283" r="1.5"/>
+      <circle cx="166" cy="290" r="1.5"/>
+    </g>
+
+    <!-- Ears (small bumps) -->
+    <ellipse cx="100" cy="210" rx="6" ry="9" fill="#8a6b5a"/>
+    <ellipse cx="200" cy="210" rx="6" ry="9" fill="#8a6b5a"/>
+  </g>
+</svg>
