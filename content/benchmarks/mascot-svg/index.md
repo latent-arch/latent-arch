@@ -33,12 +33,13 @@ A few patterns emerged after the first batch of frontier models:
 - **Physical contact is the universal failure point.** Nobody fumbled the walrus or embarrassed themselves on the cello, but every single bow is doing something impossible: hovering in mid-air, fusing with a flipper, slicing through tusks. Models know what things look like; they still don't quite know how bodies touch.
 - **Details migrate to plausible-looking spots.** Two models independently drew the cello's scroll as a decorative curl on the walrus's head. When a model can't fit a part where it belongs, it doesn't drop it — it relocates it somewhere that looks vaguely intentional.
 - **Polish and correctness are different axes.** The most beautiful renders were not the most accurate ones, and the most naive-looking drawing ticked nearly every checklist item.
-- **Finishing at all was a benchmark of its own.** Some models never made it onto this page: one kept truncating the SVG mid-file, others simply timed out. Before a model can draw a walrus, it has to reliably answer — that's a result too.
+- **Finishing at all was a benchmark of its own.** Some models never made it onto this page: one kept truncating the SVG mid-file, others simply timed out — and one returned markup so creatively commented that no renderer accepts it. Before a model can draw a walrus, it has to reliably answer — that's a result too.
+- **Frontier vs open weights is a real gap here.** Every frontier model produced a recognizable scene; in the open-weights batch, only the smallest one managed a walrus, and the rest fell apart before or at the drawing stage.
 
 ### Editor's picks
 
-**Best so far — Gemini 3.1 Pro.** The cello actually looks like a crafted instrument — shaded, proportioned, believable. The flippers are planted right where they belong, and the spotlight shadows sell the whole scene. This is the one drawing you could put on a poster.
+**Best so far — Gemini 3.1 Pro.** The cello actually looks like a crafted instrument — shaded, proportioned, believable. The flippers are planted right where they belong, and the spotlight shadows sell the whole scene. This is the one drawing you could put on a poster — even if the musician himself looks suspiciously like a bear who borrowed a walrus costume.
 
-**Worst so far — Grok 4.5.** The slapdash entry: a barrel with hoops standing in for a cello, a bow balanced on a blob, everything looking like it was glued together in a hurry. To its credit, it is genuinely funny — which is not nothing for a mascot.
+**Worst so far — Llama 4 Maverick.** Brown abstract mountains for a cello, a gray balloon for a head, a red stick hovering where a bow should be. Grok 4.5, the previous holder of this title with its slapdash barrel-cello, is hereby pardoned — next to this, the barrel looks like fine craftsmanship. (Dishonorable mention: GPT-OSS 120B, whose drawing no one will ever see — its SVG doesn't parse.)
 
-This section will be updated as more models run — the open-weights batch is next.
+This section will be updated as more models run. Kimi K3 and GLM-5 keep timing out on our runner — they'll join the page when their endpoints start answering.

@@ -1,8 +1,13 @@
 [
   { "id": "claude-opus-4-8", "slug": "anthropic/claude-opus-4.8", "name": "Claude Opus 4.8", "released": "2026-05-27" },
+  { "id": "claude-sonnet-5", "slug": "anthropic/claude-sonnet-5", "name": "Claude Sonnet 5", "released": "2026-06-30" },
   { "id": "gpt-5-5", "slug": "openai/gpt-5.5", "name": "GPT-5.5", "released": "2026-04-24" },
+  { "id": "gpt-5-6-luna-pro", "slug": "openai/gpt-5.6-luna-pro", "name": "GPT-5.6 Luna Pro", "released": "2026-07-09" },
   { "id": "gemini-3-1-pro", "slug": "google/gemini-3.1-pro-preview", "name": "Gemini 3.1 Pro", "released": "2026-02-19" },
   { "id": "grok-4-5", "slug": "x-ai/grok-4.5", "name": "Grok 4.5", "released": "2026-07-08" },
+  { "id": "qwen3-7-max", "slug": "qwen/qwen3.7-max", "name": "Qwen3.7 Max", "released": "2026-05-21" },
+  { "id": "mistral-medium-3-5", "slug": "mistralai/mistral-medium-3-5", "name": "Mistral Medium 3.5", "released": "2026-04-30" },
+  { "id": "minimax-m3", "slug": "minimax/minimax-m3", "name": "MiniMax M3", "released": "2026-05-31" },
   { "id": "kimi-k3", "slug": "moonshotai/kimi-k3", "name": "Kimi K3", "released": "2026-07-16" },
   { "id": "glm-5", "slug": "z-ai/glm-5", "name": "GLM-5", "released": "2026-02-11" },
   { "id": "llama-4-maverick", "slug": "meta-llama/llama-4-maverick", "name": "Llama 4 Maverick", "released": "2025-04-05" },

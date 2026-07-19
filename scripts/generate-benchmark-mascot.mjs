@@ -108,18 +108,23 @@ async function main() {
 
   // Порядок и состав results.json — по конфигу; модель без SVG не попадает в выдачу.
   // Статичные поля (slug/name/released) всегда берутся из конфига — он источник правды,
-  // из прошлого results.json переживают только generatedAt и рукописный verdict.
+  // из прошлого results.json переживают generatedAt и рукописные verdict/invalid
+  // (invalid — флаг «SVG синтаксически битый», шаблон рисует плейсхолдер вместо картинки).
   const writeResults = () => {
     const results = config
       .filter((m) => prevById.has(m.id) && existsSync(path.join(SVG_DIR, `${m.id}.svg`)))
-      .map((m) => ({
-        id: m.id,
-        slug: m.slug,
-        name: m.name,
-        released: m.released ?? "",
-        generatedAt: prevById.get(m.id).generatedAt ?? "",
-        verdict: prevById.get(m.id).verdict ?? "",
-      }));
+      .map((m) => {
+        const prev = prevById.get(m.id);
+        return {
+          id: m.id,
+          slug: m.slug,
+          name: m.name,
+          released: m.released ?? "",
+          generatedAt: prev.generatedAt ?? "",
+          verdict: prev.verdict ?? "",
+          ...(prev.invalid ? { invalid: true } : {}),
+        };
+      });
     writeFileSync(RESULTS_JSON, JSON.stringify(results, null, 2) + "\n");
     return results.length;
   };

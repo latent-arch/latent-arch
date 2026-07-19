@@ -37,7 +37,7 @@
     "name": "Llama 4 Maverick",
     "released": "2025-04-05",
     "generatedAt": "2026-07-19",
-    "verdict": ""
+    "verdict": "Abstract art. There may be a cello somewhere in those brown mountain shapes, the gray balloon with scratch marks is presumably the walrus, and the floating red stick must be the bow — but not a single checklist item is confidently present. The oldest model on this page, and a humbling reminder of how recent the progress in this task really is. 0–1 of 7."
   },
   {
     "id": "gpt-oss-120b",
@@ -45,7 +45,8 @@
     "name": "GPT-OSS 120B",
     "released": "2025-08-05",
     "generatedAt": "2026-07-19",
-    "verdict": ""
+    "verdict": "Never made it to the screen: the SVG does not parse. The model helpfully annotated its path coordinates with XML comments — inside the attribute value, which is illegal — so no renderer will ever display this drawing. A very engineer way to fail: unrenderable, but thoroughly documented. 0 of 7.",
+    "invalid": true
   },
   {
     "id": "qwen3-6-35b",
@@ -53,6 +54,6 @@
     "name": "Qwen3.6 35B-A3B",
     "released": "2026-04-27",
     "generatedAt": "2026-07-19",
-    "verdict": ""
+    "verdict": "The showman. The smallest model in the lineup staged a full performance: red curtains, a spotlight, even a music stand. The walrus is genuinely good — tusks, whiskers, a happy smile — but the cello dissolved mid-air into a crab-like tangle of strings. Wonderful theatre, questionable instrument. Roughly 3 of 7."
   }
 ]

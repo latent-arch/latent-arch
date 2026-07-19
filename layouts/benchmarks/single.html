@@ -45,8 +45,12 @@
     {{- range $i, $r := $results }}
     {{- with $.Resources.Get (printf "results/%s.svg" $r.id) }}
     <figure class="bench-result" data-model="{{ $r.id }}"{{ if ne $i 0 }} hidden{{ end }}>
+      {{- if $r.invalid }}
+      <div class="bench-broken">The SVG this model returned is not valid XML — no renderer can display it.<br>That, too, is a result.</div>
+      {{- else }}
       <img src="data:image/svg+xml;base64,{{ .Content | base64Encode }}"
            alt="{{ $r.name }} — unedited output for: {{ $.Title }}">
+      {{- end }}
       <figcaption>
         {{- if $r.verdict }}
         <p>{{ $r.verdict | markdownify }}</p>
@@ -113,6 +117,17 @@
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 16px;
+  }
+  .bench-broken {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    text-align: center;
+    color: var(--secondary);
+    border: 2px dashed var(--border);
+    border-radius: 4px;
+    padding: 24px;
   }
   .bench-result img {
     display: block;
