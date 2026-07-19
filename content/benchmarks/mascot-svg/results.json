@@ -48,6 +48,14 @@
     "verdict": "Charming children's-book style, and the checklist is nearly all here: both tusks, whiskers, two proper f-holes, four strings, a tailpiece and an endpin. The cello, however, is shaped like a barrel with hoops, and the bow rests on a flipper-blob rather than being held. Roughly 5 of 7."
   },
   {
+    "id": "qwen3-7-max",
+    "slug": "qwen/qwen3.7-max",
+    "name": "Qwen3.7 Max",
+    "released": "2026-05-21",
+    "generatedAt": "2026-07-19",
+    "verdict": ""
+  },
+  {
     "id": "mistral-medium-3-5",
     "slug": "mistralai/mistral-medium-3-5",
     "name": "Mistral Medium 3.5",
