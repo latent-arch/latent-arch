@@ -92,6 +92,8 @@ async function main() {
   } else {
     // Дефолт: только модели без результата — опубликованные рисунки не перерисовываем
     targets = config.filter((m) => !existsSync(path.join(SVG_DIR, `${m.id}.svg`)));
+    const skipped = config.filter((m) => !targets.includes(m));
+    if (skipped.length) console.log(`Пропуск (результат уже есть): ${skipped.map((m) => m.id).join(", ")}`);
     if (!targets.length) console.log("У всех моделей из конфига уже есть результат — генерировать нечего");
   }
 

@@ -14,5 +14,21 @@
     "released": "2026-04-24",
     "generatedAt": "2026-07-19",
     "verdict": "The most polished drawing of the batch — gradients, shading, tiny f-holes, a confident endpin. But the composition turns surreal: the cello is fused into the walrus's belly, the scroll floats above its head like a hair curl, the bow slices right through the tusks — and the walrus has no legs at all, the body just fades out below. Beautiful chaos; roughly 5 of 7."
+  },
+  {
+    "id": "gemini-3-1-pro",
+    "slug": "google/gemini-3.1-pro-preview",
+    "name": "Gemini 3.1 Pro",
+    "released": "2026-02-19",
+    "generatedAt": "2026-07-19",
+    "verdict": "The artist of the group: a dramatic spotlight, closed eyes, magnificent whiskers — this walrus clearly feels the music. The cello has strings, a bridge, an endpin and a bow placed right at the bridge, but only one f-hole made it, and the scroll ended up as a little curl on the walrus's head — a strangely popular spot. Roughly 6 of 7."
+  },
+  {
+    "id": "grok-4-5",
+    "slug": "x-ai/grok-4.5",
+    "name": "Grok 4.5",
+    "released": "2026-07-08",
+    "generatedAt": "2026-07-19",
+    "verdict": "Charming children's-book style, and the checklist is nearly all here: both tusks, whiskers, two proper f-holes, four strings, a tailpiece and an endpin. The cello, however, is shaped like a barrel with hoops, and the bow rests on a flipper-blob rather than being held. Roughly 5 of 7."
   }
 ]

@@ -22,3 +22,23 @@ The checklist, if you want to score along: two tusks · whiskers · curved cello
 ## The results
 
 Pick a model — the drawing below is its actual, unedited output. New models are added as they come out.
+
+<!--after-results-->
+
+## Takeaways so far
+
+A few patterns emerged after the first batch of frontier models:
+
+- **The scene itself is basically solved.** Every model that returned a complete SVG drew something you would instantly caption "a walrus playing a cello". Compare that to the stick-figure pelicans of 2024 — spatial drawing-by-text has come a very long way.
+- **Physical contact is the universal failure point.** Nobody fumbled the walrus or embarrassed themselves on the cello, but every single bow is doing something impossible: hovering in mid-air, fusing with a flipper, slicing through tusks. Models know what things look like; they still don't quite know how bodies touch.
+- **Details migrate to plausible-looking spots.** Two models independently drew the cello's scroll as a decorative curl on the walrus's head. When a model can't fit a part where it belongs, it doesn't drop it — it relocates it somewhere that looks vaguely intentional.
+- **Polish and correctness are different axes.** The most beautiful renders were not the most accurate ones, and the most naive-looking drawing ticked nearly every checklist item.
+- **Finishing at all was a benchmark of its own.** Some models never made it onto this page: one kept truncating the SVG mid-file, others simply timed out. Before a model can draw a walrus, it has to reliably answer — that's a result too.
+
+### Editor's picks
+
+**Best so far — Gemini 3.1 Pro.** The cello actually looks like a crafted instrument — shaded, proportioned, believable. The flippers are planted right where they belong, and the spotlight shadows sell the whole scene. This is the one drawing you could put on a poster.
+
+**Worst so far — Grok 4.5.** The slapdash entry: a barrel with hoops standing in for a cello, a bow balanced on a blob, everything looking like it was glued together in a hurry. To its credit, it is genuinely funny — which is not nothing for a mascot.
+
+This section will be updated as more models run — the open-weights batch is next.
