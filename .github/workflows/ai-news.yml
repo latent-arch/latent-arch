@@ -5,7 +5,12 @@ name: Collect AI news
 on:
   schedule:
     - cron: '30 5 * * *'   # ежедневно 05:30 UTC (время примерное — shared runners могут задерживать)
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      max_picks:
+        description: 'Переопределить MAX_PICKS для этого прогона (например, для разового catch-up); пусто — значение по умолчанию из скрипта'
+        required: false
+        type: string
   # ВРЕМЕННО: триггер для тестового запуска из sandbox без API-токена. Убрать после проверки.
   push:
     paths:
@@ -35,6 +40,12 @@ jobs:
       - name: Собрать и откурировать новости
         run: |
           set -o pipefail
+          # MAX_PICKS выставляем только если явно передан через workflow_dispatch —
+          # иначе (schedule/push) переменная должна остаться неустановленной,
+          # чтобы сработал дефолт из скрипта, а не Number("") === 0.
+          if [ -n "${{ github.event.inputs.max_picks }}" ]; then
+            export MAX_PICKS="${{ github.event.inputs.max_picks }}"
+          fi
           node scripts/collect-ai-news.mjs 2>&1 | tee /tmp/collect.log
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
