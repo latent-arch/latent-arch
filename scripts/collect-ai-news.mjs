@@ -2,8 +2,11 @@
 // Запуск: node scripts/collect-ai-news.mjs [--dry-run | --backfill]
 //   --dry-run — только напечатать кандидатов (без LLM и записи файлов).
 //   --backfill — дозаполнить author/readingTime в существующих карточках (без фидов и LLM).
+// Источники с "reserved": true в ai-news-sources.json получают отдельную резервацию:
+// до 1 карточки на такой источник курируется отдельно от общего пула (см. curate() и резервацию в конце файла) —
+// это не даёт им теряться в общей конкуренции за MAX_PICKS с крупными лабами/изданиями.
 // Env: OPENROUTER_API_KEY (обязателен без --dry-run), OPENROUTER_MODEL=anthropic/claude-opus-4.8,
-//      WINDOW_HOURS=48, MAX_PICKS=5, MAX_CARDS=500.
+//      WINDOW_HOURS=48, MAX_PICKS=25, MAX_CARDS=1500.
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
@@ -22,8 +25,8 @@ const CONFIG = {
   openrouterModel: process.env.OPENROUTER_MODEL ?? "anthropic/claude-opus-4.8", // слаг из openrouter.ai/models
   // Сбор
   windowHours: Number(process.env.WINDOW_HOURS ?? 48), // брать статьи не старше N часов
-  maxPicks: Number(process.env.MAX_PICKS ?? 5), // сколько новостей модель отбирает за тик
-  maxCards: Number(process.env.MAX_CARDS ?? 500), // retention: максимум карточек в content/ai-news/
+  maxPicks: Number(process.env.MAX_PICKS ?? 25), // сколько новостей модель отбирает за тик (включая резерв по источникам)
+  maxCards: Number(process.env.MAX_CARDS ?? 1500), // retention: максимум карточек в content/ai-news/
   maxPerSource: 15, // не тащить весь бэклог фида
   wordsPerMinute: 213, // как в Hugo .ReadingTime — чтобы «N min» совпадал с карточками постов
   // CLI
@@ -155,6 +158,7 @@ async function fetchCandidates(knownUrls) {
         url: link,
         date: new Date(ts).toISOString(),
         source: source.name,
+        sourceId: source.id,
         creator: decodeEntities(asText(item.creator ?? item.author).replace(/\s+/g, " ").trim()),
         snippet: decodeEntities(asText(item.contentSnippet).replace(/\s+/g, " ").slice(0, 500)),
       });
@@ -164,7 +168,7 @@ async function fetchCandidates(knownUrls) {
   return candidates;
 }
 
-async function curate(candidates) {
+async function curate(candidates, maxPicks) {
   if (!CONFIG.openrouterApiKey) {
     throw new Error("OPENROUTER_API_KEY не задан (для запуска без LLM используй --dry-run)");
   }
@@ -231,10 +235,10 @@ async function curate(candidates) {
             type: "input_text",
             text:
               `Below are ${candidates.length} candidate news items collected from RSS feeds. ` +
-              `Select up to ${CONFIG.maxPicks} of the most significant ones: model releases, major product/tool launches, ` +
+              `Select up to ${maxPicks} of the most significant ones: model releases, major product/tool launches, ` +
               `notable research, and important industry news. Skip minor updates, marketing fluff, and listicles. ` +
               `If several items cover the same story, pick one (prefer the primary source). ` +
-              `If fewer than ${CONFIG.maxPicks} items are genuinely significant, pick fewer — an empty list is acceptable. ` +
+              `If fewer than ${maxPicks} items are genuinely significant, pick fewer — an empty list is acceptable. ` +
               `For each pick write a neutral 1-2 sentence English summary of what happened and why it matters.\n\n${list}`,
           },
         ],
@@ -322,6 +326,42 @@ function applyRetention() {
   }
 }
 
+// Резервация: источники с "reserved": true в ai-news-sources.json курируются отдельно,
+// каждый — до 1 карточки из своего пула кандидатов, вне конкуренции с общим потоком
+// (иначе такие источники, как персональные блоги, стабильно проигрывают крупным лабам
+// и изданиям в общем отборе по "значимости"). Остаток лимита MAX_PICKS отбирается как обычно
+// из всех кандидатов, кроме уже зарезервированных.
+async function selectPicks(candidates) {
+  const { sources } = JSON.parse(fs.readFileSync(SOURCES_FILE, "utf8"));
+  const reservedIds = sources.filter((s) => s.reserved).map((s) => s.id);
+
+  const picks = [];
+  const pickedUrls = new Set();
+
+  for (const sourceId of reservedIds) {
+    const pool = candidates.filter((c) => c.sourceId === sourceId);
+    if (!pool.length) continue;
+    const sourcePicks = await curate(pool, 1);
+    for (const p of sourcePicks) {
+      const candidate = pool[p.index];
+      if (pickedUrls.has(candidate.url)) continue;
+      pickedUrls.add(candidate.url);
+      picks.push({ candidate, summary: p.summary });
+    }
+  }
+
+  const remainingSlots = CONFIG.maxPicks - picks.length;
+  const remainingPool = candidates.filter((c) => !pickedUrls.has(c.url));
+  if (remainingSlots > 0 && remainingPool.length > 0) {
+    const generalPicks = await curate(remainingPool, remainingSlots);
+    for (const p of generalPicks) {
+      picks.push({ candidate: remainingPool[p.index], summary: p.summary });
+    }
+  }
+
+  return picks;
+}
+
 if (CONFIG.backfill) {
   await backfillCards();
   console.log("Backfill готов");
@@ -338,13 +378,12 @@ if (CONFIG.dryRun) {
 }
 
 if (candidates.length > 0) {
-  const picks = await curate(candidates);
+  const picks = await selectPicks(candidates);
   console.log(`LLM отобрал: ${picks.length}`);
   fs.mkdirSync(CONTENT_DIR, { recursive: true });
-  for (const pick of picks) {
-    const candidate = candidates[pick.index];
+  for (const { candidate, summary } of picks) {
     const meta = await fetchArticleMeta(candidate.url);
-    const file = writeCard(candidate, pick.summary, meta);
+    const file = writeCard(candidate, summary, meta);
     console.log(`+ ${path.basename(file)}`);
   }
 }
