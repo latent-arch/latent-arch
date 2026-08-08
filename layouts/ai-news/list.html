@@ -10,8 +10,8 @@
   {{- end }}
 </header>
 
-{{/* Пагинация: сколько карточек на "странице". Реальные /page/N/ — SEO- и no-JS-фолбэк;
-     со включённым JS страницы подгружаются одна за другой при скролле (см. скрипт ниже). */}}
+{{/* Пагинация: сколько карточек на "странице". Реальные /page/N/ используются только как
+     источник данных для lazy loading (см. скрипт ниже) — видимой навигации по страницам нет. */}}
 {{- $paginator := .Paginate .RegularPages 20 }}
 
 <div id="ai-news-list">
@@ -40,17 +40,10 @@
 {{- end }}
 </div>
 
-{{- if gt $paginator.TotalPages 1 }}
-<footer class="page-footer" id="ai-news-pager">
-  <nav class="pagination">
-    {{- if $paginator.HasPrev }}
-    <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">« {{ i18n "prev_page" }}</a>
-    {{- end }}
-    {{- if $paginator.HasNext }}
-    <a class="next" href="{{ $paginator.Next.URL | absURL }}">Load more »</a>
-    {{- end }}
-  </nav>
-</footer>
+{{/* Невидимый sentinel для IntersectionObserver — не навигация, а только триггер подгрузки.
+     Присутствует, только если есть следующая страница; на последней странице просто отсутствует. */}}
+{{- if $paginator.HasNext }}
+<div id="ai-news-pager" data-next="{{ $paginator.Next.URL | absURL }}"></div>
 {{- end }}
 
 <style>
@@ -111,9 +104,9 @@
 
     initCards(document.querySelectorAll("#ai-news-list > .post-entry"));
 
-    // Бесконечный скролл: прогрессивное улучшение над обычной постраничной навигацией выше.
-    // Когда футер с "Load more" попадает во вьюпорт — подгружаем следующую /page/N/ фетчем,
-    // достаём из неё карточки и её собственный пейджер, дописываем в DOM и продолжаем цепочку.
+    // Бесконечный скролл: единственный способ подгрузки, без видимой навигации.
+    // Невидимый sentinel (#ai-news-pager) попадает во вьюпорт — подгружаем следующую
+    // /page/N/ фетчем, достаём из неё карточки и её собственный sentinel, продолжаем цепочку.
     const list = document.getElementById("ai-news-list");
     let pager = document.getElementById("ai-news-pager");
     if (!list || !pager) return;
@@ -133,17 +126,15 @@
       pager = next;
       if (!pager) return;
       list.after(pager);
-      if (pager.querySelector(".next")) observer.observe(pager);
+      observer.observe(pager);
     }
 
     async function loadNext() {
-      const link = pager?.querySelector(".next");
-      if (!link || loading) return;
+      const url = pager?.dataset.next;
+      if (!url || loading) return;
       loading = true;
-      const label = link.textContent;
-      link.textContent = "Loading…";
       try {
-        const res = await fetch(link.href);
+        const res = await fetch(url);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const doc = new DOMParser().parseFromString(await res.text(), "text/html");
         const newCards = Array.from(doc.querySelectorAll("#ai-news-list > .post-entry")).map((el) =>
@@ -153,14 +144,12 @@
         initCards(newCards);
         const nextPager = doc.getElementById("ai-news-pager");
         attachPager(nextPager ? document.importNode(nextPager, true) : null);
-      } catch {
-        link.textContent = label;
       } finally {
         loading = false;
       }
     }
 
-    if (pager.querySelector(".next")) observer.observe(pager);
+    observer.observe(pager);
   })();
 </script>
 
