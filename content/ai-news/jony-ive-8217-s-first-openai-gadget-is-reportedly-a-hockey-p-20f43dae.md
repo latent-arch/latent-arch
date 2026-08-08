@@ -1,5 +1,5 @@
 ---
-title: "Jony Ive&#8217;s first OpenAI gadget is reportedly a hockey puck-sized smart speaker"
+title: "Jony Ive’s first OpenAI gadget is reportedly a hockey puck-sized smart speaker"
 date: 2026-08-06T20:55:39.000Z
 source: "The Verge"
 author: "Stevie Bonifield"

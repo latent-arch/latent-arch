@@ -9,6 +9,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 import Parser from "rss-parser";
+import he from "he";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CONTENT_DIR = path.join(ROOT, "content", "ai-news");
@@ -80,7 +81,7 @@ async function fetchArticleMeta(url) {
     html.match(/<meta[^>]+content=["']([^"'<>]+)["'][^>]+name=["']author["']/i)?.[1] ??
     html.match(/"author"\s*:\s*\{[^{}]*"name"\s*:\s*"([^"]+)"/)?.[1] ??
     "";
-  author = author.replace(/\s+/g, " ").trim();
+  author = decodeEntities(author.replace(/\s+/g, " ").trim());
   if (/^https?:/i.test(author)) author = ""; // article:author бывает URL-ом профиля
 
   // Текст статьи: приоритет <article>, затем <main>, затем весь <body>
@@ -107,6 +108,16 @@ function asText(value) {
   return String(value);
 }
 
+// Некоторые фиды отдают title/description дважды HTML-экранированными (например,
+// апостроф записан как "&amp;#8217;" вместо "&#8217;"). rss-parser декодирует один слой,
+// и в тексте остаётся буквальный "&#8217;" — Hugo затем экранирует его "&" при выводе,
+// и на странице виден код сущности вместо самого символа. Декодируем второй раз, чтобы
+// снять этот остаточный слой; на уже нормально закодированном тексте повторный decode() —
+// no-op, так как "голый" "&" без валидного имени сущности decode() не трогает.
+function decodeEntities(text) {
+  return he.decode(he.decode(text));
+}
+
 async function fetchCandidates(knownUrls) {
   const { sources } = JSON.parse(fs.readFileSync(SOURCES_FILE, "utf8"));
   const cutoff = Date.now() - CONFIG.windowHours * 3600 * 1000;
@@ -131,7 +142,7 @@ async function fetchCandidates(knownUrls) {
     for (const item of feed.items ?? []) {
       if (taken >= CONFIG.maxPerSource) break;
       const link = asText(item.link).trim();
-      const title = asText(item.title).trim();
+      const title = decodeEntities(asText(item.title).trim());
       const pubDate = item.isoDate ?? item.pubDate;
       if (!link || !title || !pubDate) continue;
       const ts = Date.parse(pubDate);
@@ -143,8 +154,8 @@ async function fetchCandidates(knownUrls) {
         url: link,
         date: new Date(ts).toISOString(),
         source: source.name,
-        creator: asText(item.creator ?? item.author).replace(/\s+/g, " ").trim(),
-        snippet: asText(item.contentSnippet).replace(/\s+/g, " ").slice(0, 500),
+        creator: decodeEntities(asText(item.creator ?? item.author).replace(/\s+/g, " ").trim()),
+        snippet: decodeEntities(asText(item.contentSnippet).replace(/\s+/g, " ").slice(0, 500)),
       });
       taken++;
     }

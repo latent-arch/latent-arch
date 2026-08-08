@@ -1,5 +1,5 @@
 ---
-title: "China&#8217;s Alibaba takes another swipe at America’s AI supremacy"
+title: "China’s Alibaba takes another swipe at America’s AI supremacy"
 date: 2026-08-03T11:01:11.000Z
 source: "The Verge"
 author: "Robert Hart"

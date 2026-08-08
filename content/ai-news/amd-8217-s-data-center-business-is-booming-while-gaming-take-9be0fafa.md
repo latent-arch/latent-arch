@@ -1,5 +1,5 @@
 ---
-title: "AMD&#8217;s data center business is booming while gaming takes a backseat"
+title: "AMD’s data center business is booming while gaming takes a backseat"
 date: 2026-08-04T20:57:49.000Z
 source: "The Verge"
 author: "Stevie Bonifield"

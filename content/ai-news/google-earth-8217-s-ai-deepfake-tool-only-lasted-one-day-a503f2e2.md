@@ -1,5 +1,5 @@
 ---
-title: "Google Earth&#8217;s AI deepfake tool only lasted one day"
+title: "Google Earth’s AI deepfake tool only lasted one day"
 date: 2026-07-31T19:13:29.000Z
 source: "The Verge"
 author: "Jay Peters"

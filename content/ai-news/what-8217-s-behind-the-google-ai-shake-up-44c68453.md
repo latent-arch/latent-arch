@@ -1,5 +1,5 @@
 ---
-title: "What&#8217;s behind the Google AI shake-up"
+title: "What’s behind the Google AI shake-up"
 date: 2026-08-07T16:45:14.000Z
 source: "The Verge"
 author: "David Pierce"
