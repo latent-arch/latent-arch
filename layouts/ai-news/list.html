@@ -10,7 +10,12 @@
   {{- end }}
 </header>
 
-{{- range .RegularPages }}
+{{/* Пагинация: сколько карточек на "странице". Реальные /page/N/ — SEO- и no-JS-фолбэк;
+     со включённым JS страницы подгружаются одна за другой при скролле (см. скрипт ниже). */}}
+{{- $paginator := .Paginate .RegularPages 20 }}
+
+<div id="ai-news-list">
+{{- range $paginator.Pages }}
 <article class="post-entry" data-link="{{ .Params.link }}">
   <header class="entry-header">
     <h2 class="entry-hint-parent">{{ .Title }}</h2>
@@ -32,6 +37,20 @@
   </footer>
   <a class="entry-link" aria-label="Read the original post: {{ .Title | plainify }}" href="{{ .Params.link }}" target="_blank" rel="noopener"></a>
 </article>
+{{- end }}
+</div>
+
+{{- if gt $paginator.TotalPages 1 }}
+<footer class="page-footer" id="ai-news-pager">
+  <nav class="pagination">
+    {{- if $paginator.HasPrev }}
+    <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">« {{ i18n "prev_page" }}</a>
+    {{- end }}
+    {{- if $paginator.HasNext }}
+    <a class="next" href="{{ $paginator.Next.URL | absURL }}">Load more »</a>
+    {{- end }}
+  </nav>
+</footer>
 {{- end }}
 
 <style>
@@ -56,42 +75,92 @@
 {{/* Пометка непросмотренных карточек. Состояние — только в localStorage этого браузера
      (переносимость между устройствами сознательно не нужна). Карточка считается просмотренной
      только по клику по её ссылке (не по попаданию во вьюпорт); бейдж снимается сразу.
-     При первом визите (пустой localStorage) все карточки — unseen. */}}
+     При первом визите (пустой localStorage) все карточки — unseen. Работает и для карточек,
+     подгруженных бесконечным скроллом (initCards переиспользуется на каждую новую пачку). */}}
 <script>
   (() => {
     const KEY = "ai-news-seen";
-    const cards = Array.from(document.querySelectorAll(".post-entry[data-link]"));
-    if (!cards.length || !("localStorage" in window)) return;
-
-    const pageLinks = cards.map((c) => c.dataset.link);
-    // Храним только ссылки, всё ещё присутствующие на странице, — retention чистит хранилище сам
-    const persist = (set) => {
-      try {
-        localStorage.setItem(KEY, JSON.stringify(pageLinks.filter((l) => set.has(l))));
-      } catch {}
-    };
+    if (!("localStorage" in window)) return;
 
     let stored = null;
     try {
       stored = JSON.parse(localStorage.getItem(KEY));
     } catch {}
-    // Первый визит (или битые данные) — пустой набор: все карточки считаются непросмотренными
     const seen = new Set(Array.isArray(stored) ? stored : []);
-    const unseen = cards.filter((c) => !seen.has(c.dataset.link));
-    unseen.forEach((c) => c.classList.add("ai-news-unseen"));
-    persist(seen); // прунинг удалённых retention'ом карточек даже без новых просмотров
-
-    const markSeen = (card) => {
-      seen.add(card.dataset.link);
-      card.classList.remove("ai-news-unseen");
-      persist(seen);
+    const persist = () => {
+      try {
+        localStorage.setItem(KEY, JSON.stringify([...seen]));
+      } catch {}
     };
-    for (const card of unseen) {
-      // auxclick — открытие средней кнопкой, тоже просмотр
-      for (const type of ["click", "auxclick"]) {
-        card.addEventListener(type, () => markSeen(card));
+
+    const initCards = (cards) => {
+      for (const card of cards) {
+        const link = card.dataset.link;
+        if (!link) continue;
+        if (!seen.has(link)) card.classList.add("ai-news-unseen");
+        const markSeen = () => {
+          seen.add(link);
+          card.classList.remove("ai-news-unseen");
+          persist();
+        };
+        // auxclick — открытие средней кнопкой, тоже просмотр
+        card.addEventListener("click", markSeen);
+        card.addEventListener("auxclick", markSeen);
+      }
+    };
+
+    initCards(document.querySelectorAll("#ai-news-list > .post-entry"));
+
+    // Бесконечный скролл: прогрессивное улучшение над обычной постраничной навигацией выше.
+    // Когда футер с "Load more" попадает во вьюпорт — подгружаем следующую /page/N/ фетчем,
+    // достаём из неё карточки и её собственный пейджер, дописываем в DOM и продолжаем цепочку.
+    const list = document.getElementById("ai-news-list");
+    let pager = document.getElementById("ai-news-pager");
+    if (!list || !pager) return;
+
+    let loading = false;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) loadNext();
+      },
+      { rootMargin: "600px" }
+    );
+
+    function attachPager(next) {
+      observer.disconnect();
+      if (pager) pager.remove();
+      pager = next;
+      if (!pager) return;
+      list.after(pager);
+      if (pager.querySelector(".next")) observer.observe(pager);
+    }
+
+    async function loadNext() {
+      const link = pager?.querySelector(".next");
+      if (!link || loading) return;
+      loading = true;
+      const label = link.textContent;
+      link.textContent = "Loading…";
+      try {
+        const res = await fetch(link.href);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const doc = new DOMParser().parseFromString(await res.text(), "text/html");
+        const newCards = Array.from(doc.querySelectorAll("#ai-news-list > .post-entry")).map((el) =>
+          document.importNode(el, true)
+        );
+        newCards.forEach((el) => list.append(el));
+        initCards(newCards);
+        const nextPager = doc.getElementById("ai-news-pager");
+        attachPager(nextPager ? document.importNode(nextPager, true) : null);
+      } catch {
+        link.textContent = label;
+      } finally {
+        loading = false;
       }
     }
+
+    if (pager.querySelector(".next")) observer.observe(pager);
   })();
 </script>
 

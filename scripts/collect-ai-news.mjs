@@ -3,7 +3,7 @@
 //   --dry-run — только напечатать кандидатов (без LLM и записи файлов).
 //   --backfill — дозаполнить author/readingTime в существующих карточках (без фидов и LLM).
 // Env: OPENROUTER_API_KEY (обязателен без --dry-run), OPENROUTER_MODEL=anthropic/claude-opus-4.8,
-//      WINDOW_HOURS=48, MAX_PICKS=5, MAX_CARDS=50.
+//      WINDOW_HOURS=48, MAX_PICKS=5, MAX_CARDS=500.
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
@@ -23,7 +23,7 @@ const CONFIG = {
   // Сбор
   windowHours: Number(process.env.WINDOW_HOURS ?? 48), // брать статьи не старше N часов
   maxPicks: Number(process.env.MAX_PICKS ?? 5), // сколько новостей модель отбирает за тик
-  maxCards: Number(process.env.MAX_CARDS ?? 50), // retention: максимум карточек в content/ai-news/
+  maxCards: Number(process.env.MAX_CARDS ?? 500), // retention: максимум карточек в content/ai-news/
   maxPerSource: 15, // не тащить весь бэклог фида
   wordsPerMinute: 213, // как в Hugo .ReadingTime — чтобы «N min» совпадал с карточками постов
   // CLI
