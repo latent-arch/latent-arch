@@ -121,6 +121,29 @@ function decodeEntities(text) {
   return he.decode(he.decode(text));
 }
 
+// Фид может отдать 403 или битый XML (страница анти-бот challenge вместо RSS) —
+// это обычно транзиентный WAF-блок конкретного запроса/IP раннера CI, а не системная поломка
+// источника. Один повтор с паузой снимает такие блипы; Accept выглядит менее "скриптово",
+// чем голый User-Agent.
+async function fetchFeed(url) {
+  const headers = {
+    "user-agent": "latent-arch-ai-news/1.0 (+https://latent-arch.com)",
+    accept: "application/rss+xml, application/atom+xml, application/xml;q=0.9, */*;q=0.8",
+  };
+  let lastErr;
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      const res = await fetch(url, { signal: AbortSignal.timeout(20000), headers });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await parser.parseString(await res.text());
+    } catch (err) {
+      lastErr = err;
+      if (attempt < 2) await new Promise((r) => setTimeout(r, 3000));
+    }
+  }
+  throw lastErr;
+}
+
 async function fetchCandidates(knownUrls) {
   const { sources } = JSON.parse(fs.readFileSync(SOURCES_FILE, "utf8"));
   const cutoff = Date.now() - CONFIG.windowHours * 3600 * 1000;
@@ -131,12 +154,7 @@ async function fetchCandidates(knownUrls) {
     if (source.disabled) continue;
     let feed;
     try {
-      const res = await fetch(source.url, {
-        signal: AbortSignal.timeout(20000),
-        headers: { "user-agent": "latent-arch-ai-news/1.0 (+https://latent-arch.com)" },
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      feed = await parser.parseString(await res.text());
+      feed = await fetchFeed(source.url);
     } catch (err) {
       // Одна упавшая лента не должна ронять весь тик
       console.warn(`WARN: фид ${source.id} недоступен: ${err.message}`);
