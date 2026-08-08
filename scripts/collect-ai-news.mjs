@@ -125,6 +125,7 @@ async function fetchCandidates(knownUrls) {
   const seen = new Set(knownUrls);
 
   for (const source of sources) {
+    if (source.disabled) continue;
     let feed;
     try {
       const res = await fetch(source.url, {
