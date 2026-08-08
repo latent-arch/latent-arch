@@ -3,7 +3,7 @@ title: "Packaging My Meeting Workflow Into a Claude Code Skill"
 date: 2026-07-18
 draft: false
 tags: ["ai", "agents", "claude", "claude-code", "skills", "agentic-engineering", "workflow", "plugins"]
-summary: "The story of a private meeting-minutes routine becoming a published Claude Code plugin: local Whisper transcription, templates that live in your repo instead of the tool, and why packaging a workflow beats merely having one."
+description: "The story of a private meeting-minutes routine becoming a published Claude Code plugin: local Whisper transcription, templates that live in your repo instead of the tool, and why packaging a workflow beats merely having one."
 ---
 
 Zoom leaves an `.mp4` on my disk after every recorded call. When I finally counted, there were eleven of them, going back to April. Eleven meetings where someone — usually me — said "I'll write this up," and then didn't.

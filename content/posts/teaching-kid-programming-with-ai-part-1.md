@@ -3,7 +3,7 @@ title: "Teaching My Kid Programming with AI — Part 1: The Setup"
 date: 2026-02-28
 draft: false
 tags: ["ai", "education", "parenting", "openclaw", "claude"]
-summary: "How a 20-year tech veteran set up an AI tutor on Discord to teach his child competitive programming — and what happened on day one."
+description: "How a 20-year tech veteran set up an AI tutor on Discord to teach his child competitive programming — and what happened on day one."
 ShowToc: true
 ---
 

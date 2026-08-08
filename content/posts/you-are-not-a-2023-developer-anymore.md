@@ -3,7 +3,7 @@ title: "You're Not a 2023 Developer Anymore"
 date: 2026-04-28
 draft: false
 tags: ["ai", "agents", "engineering-leadership", "career", "claude", "context-engineering"]
-summary: "Working with multiple AI agents isn't 'developer plus a faster tool.' It's a role change under a fixed job title. Notes from 20 years in tech on what's actually happening cognitively, why it's not burnout, and what to do."
+description: "Working with multiple AI agents isn't 'developer plus a faster tool.' It's a role change under a fixed job title. Notes from 20 years in tech on what's actually happening cognitively, why it's not burnout, and what to do."
 ShowToc: true
 ---
 

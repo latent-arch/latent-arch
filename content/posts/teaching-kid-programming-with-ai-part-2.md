@@ -3,7 +3,7 @@ title: "Teaching My Kid Programming with AI — Part 2: The Dev Container"
 date: 2026-03-08
 draft: false
 tags: ["ai", "education", "parenting", "claude", "devcontainer", "docker", "vscode"]
-summary: "How I replaced a $600/month API setup with a reproducible VSCode dev container running Claude Code — and why it works better for teaching."
+description: "How I replaced a $600/month API setup with a reproducible VSCode dev container running Claude Code — and why it works better for teaching."
 ShowToc: true
 ---
 

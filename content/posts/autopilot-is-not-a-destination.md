@@ -3,7 +3,7 @@ title: "Autopilot Is Not a Destination"
 date: 2026-05-28
 draft: false
 tags: ["ai", "agents", "agentic-engineering", "startups", "strategy", "venture", "ai-native"]
-summary: "Sequoia's 'services are the new software' frames autopilot startups as the next $1T category — useful as a snapshot, misleading as a strategy. The main read: an early autopilot startup is structurally the same organism as the agentic solo engineer, just in a different legal wrapper, which rewrites the solo engineer's career map. Two shorter angles follow: the copilot/autopilot border is a moving line, not two markets; and the '$1 software : $6 services' arithmetic is a vanishing arbitrage, not a stable model."
+description: "Sequoia's 'services are the new software' frames autopilot startups as the next $1T category — useful as a snapshot, misleading as a strategy. The main read: an early autopilot startup is structurally the same organism as the agentic solo engineer, just in a different legal wrapper, which rewrites the solo engineer's career map. Two shorter angles follow: the copilot/autopilot border is a moving line, not two markets; and the '$1 software : $6 services' arithmetic is a vanishing arbitrage, not a stable model."
 ShowToc: true
 ---
 

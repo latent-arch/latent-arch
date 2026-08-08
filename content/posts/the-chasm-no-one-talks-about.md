@@ -3,7 +3,7 @@ title: "The Chasm No One Talks About"
 date: 2026-05-06
 draft: false
 tags: ["ai", "agents", "agentic-engineering", "engineering-leadership", "hiring", "career", "claude"]
-summary: "AI dev tooling crossed a threshold in 2026. Some engineers quietly ship what used to take a team — and the market can't tell who they are. A two-sided look at the gap: developers facing a profession without a curriculum, and companies that can't recognize the practitioners they need."
+description: "AI dev tooling crossed a threshold in 2026. Some engineers quietly ship what used to take a team — and the market can't tell who they are. A two-sided look at the gap: developers facing a profession without a curriculum, and companies that can't recognize the practitioners they need."
 ShowToc: true
 ---
 

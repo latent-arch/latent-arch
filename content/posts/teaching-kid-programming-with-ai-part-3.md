@@ -3,7 +3,7 @@ title: "Teaching My Kid Programming with AI — Part 3: From Side Project to Pro
 date: 2026-04-27
 draft: false
 tags: ["ai", "education", "competitive-programming", "claude", "codepal", "product"]
-summary: "What three months of AI tutoring taught me about pedagogy, LLM limitations, and why I turned a personal experiment into a product."
+description: "What three months of AI tutoring taught me about pedagogy, LLM limitations, and why I turned a personal experiment into a product."
 ShowToc: true
 ---
 

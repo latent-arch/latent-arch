@@ -3,7 +3,7 @@ title: "Zombie Team. Leave Now."
 date: 2026-05-18
 draft: false
 tags: ["ai", "agents", "engineering-leadership", "management", "career", "ai-native", "team"]
-summary: "Some management teams are formally alive — meetings, plans, approvals — and functionally dead. In 2026, with the industry rewiring around AI-native and an economic crunch on top, that's no longer 'inefficient' — it's a 12-month trajectory to bankruptcy. Eight signs from one planning meeting, the contrast with a live team, and what to do if you're on one."
+description: "Some management teams are formally alive — meetings, plans, approvals — and functionally dead. In 2026, with the industry rewiring around AI-native and an economic crunch on top, that's no longer 'inefficient' — it's a 12-month trajectory to bankruptcy. Eight signs from one planning meeting, the contrast with a live team, and what to do if you're on one."
 ShowToc: true
 ---
 

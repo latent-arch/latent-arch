@@ -3,7 +3,7 @@ title: "Crossing the Chasm: Who Becomes an Agentic Solo Engineer"
 date: 2026-05-10
 draft: false
 tags: ["ai", "agents", "agentic-engineering", "engineering-leadership", "platform-engineering", "career", "claude"]
-summary: "An honest look at which existing roles transform best into Agentic solo engineers, the four competency axes that define the role, and a week-by-week plan for the two strongest starting backgrounds. Plus the one thing background can't predict."
+description: "An honest look at which existing roles transform best into Agentic solo engineers, the four competency axes that define the role, and a week-by-week plan for the two strongest starting backgrounds. Plus the one thing background can't predict."
 ShowToc: true
 ---
 
