@@ -16,7 +16,7 @@
     <h2 class="entry-hint-parent">{{ .Title }}</h2>
   </header>
   <div class="entry-content">
-    <p>{{ .Plain }}</p>
+    <p>{{ .Plain | htmlUnescape }}</p>
   </div>
   {{/* Подпись в формате post_meta.html у карточек постов: дата · N min · автор.
        Источник — в конце, если не совпадает с автором (автор-fallback = источник). */}}
