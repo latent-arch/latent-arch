@@ -1,9 +1,9 @@
 ---
 title: "Astra and the Walrus"
 date: 2026-09-06
-draft: true
+draft: false
 tags: ["ai", "benchmarks", "openai", "gpt-6", "models"]
-description: "GPT-6 Astra came out this week with more noise than any launch I can remember. I gave it my usual test: draw a walrus playing a cello. Go look at what it drew."
+description: "GPT-6 Astra came out this week with more noise than any launch I can remember. I gave it my usual test: draw a walrus playing a cello. It passed. That was the whole show."
 ShowToc: false
 ---
 
@@ -11,11 +11,12 @@ OpenAI shipped GPT-6 Astra on Wednesday and since then my feed is about 70% Astr
 
 I have a habit with new models. Before reading a single benchmark table I ask them to draw a walrus playing a cello. Same prompt every time, one attempt, no retries. Two tusks, whiskers, a cello with two f-holes and four strings, standing on its endpin, bow in the flipper. Then I look at the picture. That's the whole method.
 
-<!-- TODO после прогона: заменить абзац ниже на то, что реально нарисовала Astra. Заготовка написана под «вау»; если результат средний — переписать честно, иначе пост врёт. -->
 [Astra's walrus, next to fourteen others](/benchmarks/mascot-svg/#gpt-6-astra)
 
-It is the first one on that page that made me stop and stare. I won't describe it. Pick it from the list yourself, then switch to any other model and compare.
+Every model on that page failed at the same spot: the bow. It hovers in the air, or fuses with the flipper, or goes straight through a tusk. Models knew what a walrus and a cello look like and still had no idea how one touches the other.
 
-Every model on that page failed at the same spot: the bow. It hovers in the air, or fuses with the flipper, or goes straight through a tusk. Models knew what a walrus and a cello look like and still had no idea how one touches the other. If Astra got the bow right on the first try, the computer-use demos start to make sense to me. Getting a bow onto strings you cannot see is roughly the same trick as clicking the right button in a browser you cannot see.
+Astra's walrus is the first one where nothing is wrong. Both tusks, whiskers, a real cello with two f-holes, four strings, a bridge and a scroll, standing on its endpin. One flipper on the neck, the other holds the bow, and the bow is on the strings. First try, full checklist.
 
-So yes, hype. On my walrus it looks earned.
+And I looked at it and felt nothing. It's a tidy cartoon, the kind you get from a stock icon pack. Gemini's walrus from February has a spotlight and closed eyes and clearly feels the music. Astra's just sits there doing everything correctly.
+
+So, hype. On my walrus it's a good student. Not a new era.

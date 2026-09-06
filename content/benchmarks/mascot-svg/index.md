@@ -30,7 +30,7 @@ Pick a model — the drawing below is its actual, unedited output. New models ar
 A few patterns emerged after the first batch of frontier models:
 
 - **The scene itself is basically solved.** Every model that returned a complete SVG drew something you would instantly caption "a walrus playing a cello". Compare that to the stick-figure pelicans of 2024 — spatial drawing-by-text has come a very long way.
-- **Physical contact is the universal failure point.** Nobody fumbled the walrus or embarrassed themselves on the cello, but every single bow is doing something impossible: hovering in mid-air, fusing with a flipper, slicing through tusks. Models know what things look like; they still don't quite know how bodies touch.
+- **Physical contact was the universal failure point.** In the first batch nobody fumbled the walrus or embarrassed themselves on the cello, but every single bow was doing something impossible: hovering in mid-air, fusing with a flipper, slicing through tusks. Models knew what things look like; they didn't know how bodies touch. GPT-6 Astra, in September 2026, was the first to put the bow on the strings.
 - **Details migrate to plausible-looking spots.** Two models independently drew the cello's scroll as a decorative curl on the walrus's head. When a model can't fit a part where it belongs, it doesn't drop it — it relocates it somewhere that looks vaguely intentional.
 - **Polish and correctness are different axes.** The most beautiful renders were not the most accurate ones, and the most naive-looking drawing ticked nearly every checklist item.
 - **Finishing at all was a benchmark of its own.** Some models never made it onto this page: one kept truncating the SVG mid-file, others simply timed out — and one returned markup so creatively commented that no renderer accepts it. Before a model can draw a walrus, it has to reliably answer — that's a result too.
@@ -38,8 +38,10 @@ A few patterns emerged after the first batch of frontier models:
 
 ### Editor's picks
 
+**Most correct so far — GPT-6 Astra.** The first drawing on this page with nothing wrong in it: full checklist, bow in the flipper and on the strings, other flipper on the neck. Also the first drawing with nothing in it to remember. A clean stock-icon walrus that does everything right and makes you feel nothing.
+
 **Best so far — Gemini 3.1 Pro.** The cello actually looks like a crafted instrument — shaded, proportioned, believable. The flippers are planted right where they belong, and the spotlight shadows sell the whole scene. This is the one drawing you could put on a poster — even if the musician himself looks suspiciously like a bear who borrowed a walrus costume.
 
 **Worst so far — Llama 4 Maverick.** Brown abstract mountains for a cello, a gray balloon for a head, a red stick hovering where a bow should be. Grok 4.5, the previous holder of this title with its slapdash barrel-cello, is hereby pardoned — next to this, the barrel looks like fine craftsmanship. (Dishonorable mention: GPT-OSS 120B, whose drawing no one will ever see — its SVG doesn't parse.)
 
-This section will be updated as more models run. Kimi K3 and GLM-5 keep timing out on our runner — they'll join the page when their endpoints start answering.
+This section will be updated as more models run. Kimi K3 keeps timing out on our runner, ten minutes every time; it'll join the page when its endpoint starts answering.
