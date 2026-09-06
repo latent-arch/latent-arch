@@ -71,7 +71,14 @@
       const sel = document.getElementById("bench-model");
       const figs = Array.from(document.querySelectorAll(".bench-result"));
       const sync = () => figs.forEach((f) => (f.hidden = f.dataset.model !== sel.value));
-      sel.addEventListener("change", sync);
+      // Прямая ссылка на модель: /benchmarks/mascot-svg/#<id> открывает её результат сразу
+      // (посты ссылаются на конкретный рисунок). Выбор в селекте отражается в хэше.
+      const fromHash = decodeURIComponent(location.hash.slice(1));
+      if (fromHash && figs.some((f) => f.dataset.model === fromHash)) sel.value = fromHash;
+      sel.addEventListener("change", () => {
+        history.replaceState(null, "", "#" + sel.value);
+        sync();
+      });
       sync(); // браузер мог восстановить прошлое значение селекта при обновлении страницы
     })();
   </script>
