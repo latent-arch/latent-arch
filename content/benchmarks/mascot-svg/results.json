@@ -40,6 +40,14 @@
     "verdict": ""
   },
   {
+    "id": "gpt-6-astra",
+    "slug": "openai/gpt-6-astra",
+    "name": "GPT-6 Astra",
+    "released": "2026-09-04",
+    "generatedAt": "2026-09-06",
+    "verdict": ""
+  },
+  {
     "id": "gemini-3-1-pro",
     "slug": "google/gemini-3.1-pro-preview",
     "name": "Gemini 3.1 Pro",
