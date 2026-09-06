@@ -1,4 +1,5 @@
 Пропуск (результат уже есть): claude-opus-4-8, claude-sonnet-5, gpt-5-5, gpt-5-6-luna-pro, gpt-5-6-sol, gemini-3-1-pro, grok-4-5, qwen3-7-max, mistral-medium-3-5, minimax-m3, glm-5, llama-4-maverick, gpt-oss-120b, qwen3-6-35b
-Kimi K3 (moonshotai/kimi-k3)... ошибка (пустой ответ: {"id":"gen-1788694172-pExmYzPuaYP6Z1pu3rxr","object":"chat.completion","created":1788694172,"model":"moonshotai/kimi-k3","provider":"Modal","system_fingerprint":null,"service_tier":null,"choices":[{"index":0,"logprobs":null,"finish_reason":"length","native_finish_reason":"length","message":{"role":") — оставляю прежний результат, если был
+GPT-6 Astra (openai/gpt-6-astra)... ok
+Kimi K3 (moonshotai/kimi-k3)... ошибка (таймаут вызова (10 мин)) — оставляю прежний результат, если был
 
-Готово: 0/1 новых, в results.json 14 моделей
+Готово: 1/2 новых, в results.json 15 моделей
