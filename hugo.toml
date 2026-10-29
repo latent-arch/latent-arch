@@ -21,6 +21,10 @@ theme = 'PaperMod'
   [params.footer]
     text = '[Telegram Terms](/telegram-terms/)'
 
+  [params.label]
+    # Знак из favicon.svg без плитки: currentColor — цвет следует за темой
+    iconSVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="14 12 36 42" width="22" height="26" aria-hidden="true"><path d="M18 50 V30 A14 14 0 0 1 32 16" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><g fill="currentColor"><circle cx="39.00" cy="17.88" r="2.2"/><circle cx="44.12" cy="23.00" r="2.2"/><circle cx="46.00" cy="30.00" r="2.2"/><circle cx="46.00" cy="36.67" r="2.2"/><circle cx="46.00" cy="43.33" r="2.2"/><circle cx="46.00" cy="50.00" r="2.2"/></g></svg>'
+
   [params.assets]
     favicon = '/favicon.ico'
     favicon16x16 = '/favicon-16x16.png'
