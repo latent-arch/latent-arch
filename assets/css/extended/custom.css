@@ -857,3 +857,13 @@ footer {
     background: var(--selection-bg);
     color: var(--selection-fg);
 }
+
+/* Скриншоты на страницах проектов: одна высота для десктопа и телефона */
+.post-content img.project-shot {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 420px;
+    margin: 24px auto;
+}
