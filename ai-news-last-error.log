@@ -1,10 +1,15 @@
-file:///home/runner/work/latent-arch/latent-arch/scripts/collect-ai-news.mjs:136
-        creator: (item.creator ?? item.author ?? "").replace(/\s+/g, " ").trim(),
-                                                     ^
+WARN: фид zvi недоступен: HTTP 403
+Кандидатов после дедупа и окна 48ч: 55
+node:internal/deps/undici/undici:5933
+        throw new TypeError("Body is unusable: Body has already been read");
+              ^
 
-TypeError: (item.creator ?? item.author ?? "").replace is not a function
-    at fetchCandidates (file:///home/runner/work/latent-arch/latent-arch/scripts/collect-ai-news.mjs:136:54)
+TypeError: Body is unusable: Body has already been read
+    at consumeBody (node:internal/deps/undici/undici:5933:15)
+    at _Response.text (node:internal/deps/undici/undici:5883:18)
+    at curate (file:///home/runner/work/latent-arch/latent-arch/scripts/collect-ai-news.mjs:279:79)
     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
-    at async file:///home/runner/work/latent-arch/latent-arch/scripts/collect-ai-news.mjs:310:20
+    at async selectPicks (file:///home/runner/work/latent-arch/latent-arch/scripts/collect-ai-news.mjs:362:25)
+    at async file:///home/runner/work/latent-arch/latent-arch/scripts/collect-ai-news.mjs:399:17
 
-Node.js v22.23.1
+Node.js v22.23.4
